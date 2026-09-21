@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MARY · Life, Fitness & Spiritual Suite</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+  <link rel="apple-touch-icon" href="https://emojicdn.elk.sh/🕊️?style=apple">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+    * { box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+    
+    body {
+      background: 
+        radial-gradient(circle at 10% 15%, rgba(244, 233, 223, 0.7) 0%, transparent 40%),
+        radial-gradient(circle at 90% 85%, rgba(214, 223, 215, 0.6) 0%, transparent 45%),
+        linear-gradient(135deg, #fbf8f5 0%, #f4ede6 50%, #f0f4f1 100%);
+      color: #38322c;
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+      background-attachment: fixed;
+    }
+
+    .hidden { display: none !important; }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #efe6dc; }
+    ::-webkit-scrollbar-thumb { background: #b8a394; border-radius: 999px; }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(224, 210, 198, 0.7);
+      box-shadow: 0 15px 35px rgba(80, 60, 50, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    }
+
+    .glass-card-solid {
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(214, 198, 185, 0.9);
+      box-shadow: 0 20px 40px rgba(80, 60, 50, 0.1), inset 0 1px 0 rgba(255, 255, 255, 1);
+    }
+
+    .nav-btn {
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+    .nav-btn.active {
+      background: linear-gradient(135deg, #a37059 0%, #8c5d48) !important;
+      color: #ffffff !important;
+      font-weight: 800;
+      box-shadow: 0 6px 20px rgba(163, 112, 89, 0.35);
+    }
+
+    .modal-overlay {
+      background-color: rgba(56, 50, 44, 0.55);
+      backdrop-filter: blur(6px);
+      z-index: 99999 !important;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased">
+
+  <!-- HEADER -->
+  <header class="glass-card-solid sticky top-0 z-40 border-b border-[#e0d2c6]">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div class="flex items-center space-x-3">
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-[#a37059] to-[#73826b] flex items-center justify-center font-black text-white text-lg shadow-lg">🕊️</div>
+        <div>
+          <h1 class="text-base font-black tracking-wider uppercase text-stone-800 leading-none">MARY <span class="text-[#a37059] text-xs font-bold">LIFE & SPIRITUAL SUITE</span></h1>
+          <p class="text-[11px] font-medium text-stone-500 italic mt-0.5">"Paz, constancia y propósito"</p>
+        </div>
+      </div>
+
+      <nav class="flex flex-wrap items-center justify-center gap-1.5 bg-[#f4ede6] p-1.5 rounded-2xl border border-[#e0d2c6]">
+        <button onclick="switchTab('resumen')" id="tab-btn-resumen" class="nav-btn active px-3 py-1.5 rounded-xl font-bold text-xs text-stone-600">📊 Resumen</button>
+        <button onclick="switchTab('alimentacion')" id="tab-btn-alimentacion" class="nav-btn px-3 py-1.5 rounded-xl font-bold text-xs text-stone-600">🥗 Nutrición</button>
+        <button onclick="switchTab('cardio')" id="tab-btn-cardio" class="nav-btn px-3 py-1.5 rounded-xl font-bold text-xs text-stone-600">🏃‍♀️ Cardio</button>
+        <button onclick="switchTab('entrenamiento')" id="tab-btn-entrenamiento" class="nav-btn px-3 py-1.5 rounded-xl font-bold text-xs text-stone-600">💪 Entreno</button>
+        <button onclick="switchTab('calendario')" id="tab-btn-calendario" class="nav-btn px-3 py-1.5 rounded-xl font-bold text-xs text-stone-600">🗓️ Calendario</button>
+        <button onclick="switchTab('peso')" id="tab-btn-peso" class="nav-btn px-3 py-1.5 rounded-xl font-bold text-xs text-stone-600">⚖️ Biometría</button>
+        <button onclick="switchTab('poker')" id="tab-btn-poker" class="nav-btn px-3 py-1.5 rounded-xl font-bold text-xs text-stone-600">♠️ Póker</button>
+        <button onclick="switchTab('espiritual')" id="tab-btn-espiritual" class="nav-btn px-3 py-1.5 rounded-xl font-bold text-xs text-stone-600">🕊️ Espiritual</button>
+      </nav>
+
+      <div class="flex items-center space-x-2">
+        <span class="text-[9px] font-extrabold px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300">☁️ Sincronizado</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- BARRA DE RESPALDO Y SEGURIDAD -->
+  <div class="bg-[#f4ede6] border-b border-[#e0d2c6] px-4 py-2 flex justify-between items-center text-xs font-bold text-stone-700 max-w-7xl mx-auto w-full">
+    <span>🔄 Respaldo de Seguridad Celular ⇄ PC:</span>
+    <div class="space-x-3">
+      <button onclick="openExportModal()" class="text-[#a37059] hover:underline cursor-pointer">📤 Copiar Código de Datos</button>
+      <button onclick="openImportModal()" class="text-[#73826b] hover:underline cursor-pointer">📥 Pegar y Sincronizar Datos</button>
+    </div>
+  </div>
+
+  <!-- MAIN CONTAINER -->
+  <main class="flex-1 max-w-7xl mx-auto w-full p-4 sm:p-6 lg:p-8 space-y-6">
+
+    <div class="glass-card rounded-3xl p-4 flex flex-wrap items-center justify-between gap-3">
+      <span class="text-xs font-black uppercase text-stone-700 tracking-wider">⚡ Panel de Control Activo</span>
+      <button onclick="openModalMetas()" class="px-4 py-2 bg-[#a37059] text-white font-extrabold text-xs rounded-xl shadow-md cursor-pointer">⚙️ Configurar Metas Base</button>
+    </div>
+
+    <!-- PESTAÑA 1: RESUMEN GENERAL -->
+    <section id="pane-resumen" class="tab-pane space-y-6">
+      <div class="glass-card-solid rounded-3xl p-6 space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-[#e0d2c6]">
+          <div>
+            <h3 class="text-base font-black text-stone-800">Resumen General</h3>
+            <p class="text-xs text-stone-500">Métricas y reporte por rango de fechas</p>
+          </div>
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="text-xs font-bold text-stone-600">Desde:</span>
+            <input type="date" id="res-from" onchange="renderResumenRange()" class="bg-white border border-[#e0d2c6] rounded-xl px-2 py-1 text-xs font-bold">
+            <span class="text-xs font-bold text-stone-600">Hasta:</span>
+            <input type="date" id="res-to" onchange="renderResumenRange()" class="bg-white border border-[#e0d2c6] rounded-xl px-2 py-1 text-xs font-bold">
+            <button onclick="copyWhatsAppReport()" class="px-3 py-1.5 bg-[#a37059] text-white font-black text-xs rounded-xl shadow-sm cursor-pointer">📋 Copiar WhatsApp</button>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4" id="resumen-range-kpis"></div>
+
+        <div class="pt-4 border-t border-[#e0d2c6] space-y-4">
+          <div class="flex justify-between items-center">
+            <h4 class="font-black text-stone-800 text-sm">✨ Metas & Habit Tracker Semanal</h4>
+            <button onclick="openModalMetaCustom()" class="px-3 py-1 bg-[#a37059] text-white font-bold text-xs rounded-xl shadow-sm cursor-pointer">+ Nueva Meta</button>
+          </div>
+          <div id="custom-goals-container" class="space-y-3"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PESTAÑA 2: ALIMENTACIÓN -->
+    <section id="pane-alimentacion" class="tab-pane space-y-6 hidden">
+      <div class="glass-card-solid rounded-3xl p-6 space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-[#e0d2c6]">
+          <div>
+            <h3 class="text-base font-black text-stone-800">🥗 Control de Alimentación & Macros</h3>
+            <p class="text-xs text-stone-500">Registro detallado con cantidades y totales</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <input type="date" id="al-from" onchange="renderAlimentacionView()" class="bg-white border border-[#e0d2c6] rounded-xl px-2 py-1 text-xs font-bold">
+            <input type="date" id="al-to" onchange="renderAlimentacionView()" class="bg-white border border-[#e0d2c6] rounded-xl px-2 py-1 text-xs font-bold">
+            <button onclick="openModalAlimentacion()" class="px-4 py-2 bg-[#a37059] text-white font-bold text-xs rounded-xl shadow-md cursor-pointer">+ Registrar Comida</button>
+          </div>
+        </div>
+        <div id="alimentacion-totals-card"></div>
+        <div id="alimentacion-content" class="space-y-4"></div>
+      </div>
+    </section>
+
+    <!-- PESTAÑA 3: CARDIO -->
+    <section id="pane-cardio" class="tab-pane space-y-6 hidden">
+      <div class="glass-card-solid rounded-3xl p-6 space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-[#e0d2c6]">
+          <div>
+            <h3 class="text-base font-black text-stone-800">🏃‍♀️ Cardio & Running</h3>
+            <p class="text-xs text-stone-500">Sesiones y totales de distancia</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <input type="date" id="ca-from" onchange="renderCardioView()" class="bg-white border border-[#e0d2c6] rounded-xl px-2 py-1 text-xs font-bold">
+            <input type="date" id="ca-to" onchange="renderCardioView()" class="bg-white border border-[#e0d2c6] rounded-xl px-2 py-1 text-xs font-bold">
+            <button onclick="openModalCardio()" class="px-4 py-2 bg-[#a37059] text-white font-bold text-xs rounded-xl shadow-md cursor-pointer">+ Registrar</button>
+          </div>
+        </div>
+        <div id="cardio-totals-card"></div>
+        <div id="cardio-content" class="space-y-4"></div>
+      </div>
+    </section>
+
+    <!-- PESTAÑA 4: ENTRENAMIENTO -->
+    <section id="pane-entrenamiento" class="tab-pane space-y-6 hidden">
+      <div class="glass-card-solid rounded-3xl p-6 space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-[#e0d2c6]">
+          <div>
+            <h3 class="text-base font-black text-stone-800">💪 Registro de Fuerza & PRs</h3>
+            <p class="text-xs text-stone-500">Series, peso mixto y PRs marcados</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <input type="date" id="en-from" onchange="renderEntrenamientoView()" class="bg-white border border-[#e0d2c6] rounded-xl px-2 py-1 text-xs font-bold">
+            <input type="date" id="en-to" onchange="renderEntrenamientoView()" class="bg-white border border-[#e0d2c6] rounded-xl px-2 py-1 text-xs font-bold">
+            <button onclick="openModalRutina()" class="px-4 py-2 bg-[#a37059] text-white font-bold text-xs rounded-xl shadow-md cursor-pointer">+ Nuevo Entreno</button>
+          </div>
+        </div>
+        <div id="entrenamiento-content" class="space-y-4"></div>
+      </div>
+    </section>
+
+    <!-- PESTAÑA 5: CALENDARIO -->
+    <section id="pane-calendario" class="tab-pane space-y-6 hidden">
+      <div class="glass-card-solid rounded-3xl p-6 space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-[#e0d2c6]">
+          <div>
+            <h3 class="text-base font-black text-stone-800">🗓️ Calendario Histórico de Actividad</h3>
+            <p class="text-xs text-stone-500">🥗 Calorías | 🐟 Proteína | 🏋️‍♀️ Fuerza | 🏃‍♀️ Cardio</p>
+          </div>
+          <div class="flex items-center space-x-2">
+            <button onclick="changeCalendarMonth(-1)" class="px-3 py-1 bg-white border border-[#e0d2c6] rounded-xl font-bold text-xs cursor-pointer">◀ Mes Anterior</button>
+            <span id="calendar-month-label" class="text-xs font-black uppercase text-stone-800 px-2"></span>
+            <button onclick="changeCalendarMonth(1)" class="px-3 py-1 bg-white border border-[#e0d2c6] rounded-xl font-bold text-xs cursor-pointer">Mes Siguiente ▶</button>
+          </div>
+        </div>
+        <div id="calendar-view" class="grid grid-cols-7 gap-2 py-4"></div>
+      </div>
+    </section>
+
+    <!-- PESTAÑA 6: PESO & BIOMETRÍA -->
+    <section id="pane-peso" class="tab-pane space-y-6 hidden">
+      <div class="glass-card-solid rounded-3xl p-6 space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-[#e0d2c6]">
+          <div>
+            <h3 class="text-base font-black text-stone-800">⚖️ Control de Peso, Medidas & Fotos</h3>
+            <p class="text-xs text-stone-500">Seguimiento biométrico completo, objetivos y galería visual</p>
+          </div>
+          <span id="peso-promedio-badge" class="px-3 py-1.5 rounded-xl bg-[#a37059]/20 text-[#6b4231] font-black text-xs border border-[#a37059]/40">Promedio Semanal: -- kg</span>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div class="glass-card p-5 rounded-2xl space-y-3">
+            <h4 class="font-black text-stone-800 text-xs uppercase tracking-wider">📌 Registrar Peso Diario</h4>
+            <input type="hidden" id="peso-edit-id">
+            <div class="grid grid-cols-2 gap-2 text-xs">
+              <div><label class="font-bold text-stone-600 block mb-1">Fecha</label><input type="date" id="peso-date" class="w-full bg-white border border-[#e0d2c6] rounded-xl px-3 py-2 font-bold"></div>
+              <div><label class="font-bold text-stone-600 block mb-1">Peso (kg)</label><input type="number" step="0.1" id="peso-kg" placeholder="65.4" class="w-full bg-white border border-[#e0d2c6] rounded-xl px-3 py-2 font-bold"></div>
+            </div>
+            <div><label class="font-bold text-stone-600 block mb-1">Nota (Periodo, retención...)</label><input type="text" id="peso-nota" placeholder="Ej. Reteniendo líquidos" class="w-full bg-white border border-[#e0d2c6] rounded-xl px-3 py-2 font-medium text-xs"></div>
+            <button onclick="savePesoLog()" class="w-full py-2 bg-[#a37059] text-white rounded-xl text-xs font-black cursor-pointer shadow-sm">Registrar Peso</button>
+          </div>
+
+          <div class="glass-card p-5 rounded-2xl space-y-3">
+            <h4 class="font-black text-stone-800 text-xs uppercase tracking-wider">📸 Subir Foto de Progreso (Dispositivo)</h4>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
+              <div><label class="font-bold text-stone-600 block mb-1">Fecha</label><input type="date" id="foto-date" class="w-full bg-white border border-[#e0d2c6] rounded-xl px-3 py-2 font-bold"></div>
+              <div>
+                <label class="font-bold text-stone-600 block mb-1">Pose</label>
+                <select id="foto-pose" class="w-full bg-white border border-[#e0d2c6] rounded-xl px-3 py-2 font-bold">
+                  <option value="Frente">Frente</option>
+                  <option value="Lado">Lado</option>
+                  <option value="Espalda">Espalda</option>
+                </select>
+              </div>
+              <div><label class="font-bold text-stone-600 block mb-1">Imagen</label><input type="file" id="foto-file" accept="image/*" class="w-full bg-white border border-[#e0d2c6] rounded-xl px-2 py-1 text-xs font-bold"></div>
+            </div>
+            <button onclick="saveFotoLog()" class="w-full py-2 bg-[#73826b] text-white rounded-xl text-xs font-black cursor-pointer shadow-sm">+ Guardar Foto</button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div class="glass-card p-4 rounded-2xl space-y-2 max-h-80 overflow-y-auto"><h5 class="font-black text-stone-800 text-xs pb-1 border-b border-[#e0d2c6]">📋 Historial de Peso</h5><div id="peso-history-list" class="space-y-2 text-xs"></div></div>
+          <div class="glass-card p-4 rounded-2xl space-y-2 max-h-80 overflow-y-auto"><h5 class="font-black text-stone-800 text-xs pb-1 border-b border-[#e0d2c6]">📋 Historial de Medidas</h5><div id="med-history-list" class="space-y-2 text-xs"></div></div>
+        </div>
+
+        <div class="glass-card p-6 rounded-3xl space-y-4">
+          <h5 class="font-black text-stone-800 text-sm pb-2 border-b border-[#e0d2c6]">📸 Galería Visual de Progreso (Lado a Lado por Fecha)</h5>
+          <div id="foto-gallery-grid" class="space-y-6"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PESTAÑA 7: PÓKER -->
+    <section id="pane-poker" class="tab-pane space-y-6 hidden">
+      <div class="glass-card-solid rounded-3xl p-6 space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-[#e0d2c6]">
+          <div>
+            <h3 class="text-base font-black text-stone-800">♠️ Control de Sesiones de Póker & Cool-Down</h3>
+            <p class="text-xs text-stone-500">Registro de bankroll, ganancias Net Won, EV y gráficas</p>
+          </div>
+          <button onclick="openModalPoker()" class="px-4 py-2 bg-[#a37059] text-white font-bold text-xs rounded-xl shadow-md cursor-pointer">+ Registrar Sesión</button>
+        </div>
+        <div id="poker-totals-card"></div>
+        <div id="poker-content" class="space-y-4"></div>
+      </div>
+    </section>
+
+    <!-- PESTAÑA 8: ESPACIO ESPIRITUAL (DIARIO DEVOCIONAL) -->
+    <section id="pane-espiritual" class="tab-pane space-y-6 hidden">
+      <div class="glass-card-solid rounded-3xl p-6 space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-[#e0d2c6]">
+          <div>
+            <h3 class="text-base font-black text-stone-800">🕊️ Espacio Espiritual & Diario Devocional</h3>
+            <p class="text-xs text-stone-500">Lectura bíblica literal, reflexión, oración y tracker visual de la Biblia</p>
+          </div>
+          <button onclick="openModalDevocional()" class="px-4 py-2 bg-[#73826b] text-white font-bold text-xs rounded-xl shadow-md cursor-pointer">+ Nuevo Registro Devocional</button>
+        </div>
+
+        <!-- Filtros de Fecha para Devocionales (Desde / Hasta) -->
+        <div class="flex flex-wrap items-center gap-2 bg-white/60 p-4 rounded-2xl border border-[#e0d2c6]">
+          <span class="text-xs font-bold text-stone-700">Filtrar desde:</span>
+          <input type="date" id="dev-from" onchange="renderDevocionalHistory()" class="bg-white border border-[#e0d2c6] rounded-xl px-2 py-1 text-xs font-bold">
+          <span class="text-xs font-bold text-stone-700">Hasta:</span>
+          <input type="date" id="dev-to" onchange="renderDevocionalHistory()" class="bg-white border border-[#e0d2c6] rounded-xl px-2 py-1 text-xs font-bold">
+        </div>
+
+        <!-- Tracker Visual Manual de la Biblia -->
+        <div class="glass-card p-5 rounded-2xl space-y-3 bg-[#fbf8f5]">
+          <h4 class="font-black text-stone-800 text-xs uppercase tracking-wider">📚 Tracker Visual de Lectura Bíblica</h4>
+          <p class="text-[11px] text-stone-500">Marca manualmente los libros conforme los vas leyendo en tu jornada espiritual.</p>
+          <div id="bible-tracker-container" class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2 text-xs"></div>
+        </div>
+
+        <!-- Historial de Devocionales -->
+        <div class="space-y-4">
+          <h4 class="font-black text-stone-800 text-sm">📖 Mis Reflexiones & Notas Bíblicas</h4>
+          <div id="devocional-history-list" class="space-y-4"></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MODAL DEVOCIONAL -->
+  <div id="modal-devocional" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-overlay hidden">
+    <div class="glass-card-solid rounded-3xl max-w-lg w-full p-6 space-y-4 border border-[#e0d2c6] max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between pb-2 border-b border-[#e0d2c6]">
+        <h3 class="text-base font-black text-stone-800">🕊️ Registrar Devocional</h3>
+        <button onclick="closeModal('modal-devocional')" class="text-stone-400 font-bold cursor-pointer">✕</button>
+      </div>
+      <div class="space-y-3 text-xs">
+        <input type="hidden" id="dev-edit-id">
+        <div class="grid grid-cols-2 gap-2">
+          <div><label class="font-bold text-stone-600 block mb-1">Fecha</label><input type="date" id="dev-date" class="w-full bg-white border border-[#e0d2c6] rounded-xl px-3 py-2 font-bold"></div>
+          <div>
+            <label class="font-bold text-stone-600 block mb-1">Versión de la Biblia</label>
+            <select id="dev-version" class="w-full bg-white border border-[#e0d2c6] rounded-xl px-3 py-2 font-bold">
+              <option value="Reina-Valera 1960 (RVR1960)">Reina-Valera 1960 (RVR1960)</option>
+              <option value="Nueva Traducción Viviente (NTV)">Nueva Traducción Viviente (NTV)</option>
+              <option value="Nueva Biblia de las Américas (NBLA)">Nueva Biblia de las Américas (NBLA)</option>
+              <option value="Dios Habla Hoy (DHH)">Dios Habla Hoy (DHH)</option>
+              <option value="Otra">Otra</option>
+            </select>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-2">
+          <div><label class="font-bold text-stone-600 block mb-1">Libro y Pasaje (Ej. Isaías 40:28-31)</label><input type="text" id="dev-pasaje" placeholder="Isaías 40" class="w-full bg-white border border-[#e0d2c6] rounded-xl px-3 py-2 font-bold"></div>
+          <div><label class="font-bold text-stone-600 block mb-1">Tiempo invertido (min)</label><input type="number" id="dev-tiempo" placeholder="25" class="w-full bg-white border border-[#e0d2c6] rounded-xl px-3 py-2 font-bold"></div>
+        </div>
+        <div>
+          <label class="font-bold text-stone-600 block mb-1">Pasaje Bíblico Literal (Texto de la Biblia)</label>
+          <textarea id="dev-texto-literal" rows="3" placeholder="Pega aquí el versículo tal cual sale en la Biblia..." class="w-full bg-white border border-[#e0d2c6] rounded-xl p-2 font-medium text-stone-800"></textarea>
+        </div>
+        <div>
+          <label class="font-bold text-stone-600 block mb-1">Versículo Ancla</label>
+          <input type="text" id="dev-ancla" placeholder="La frase que más te marcó hoy..." class="w-full bg-white border border-[#e0d2c6] rounded-xl px-3 py-2 font-bold">
+        </div>
+        <div>
+          <label class="font-bold text-stone-600 block mb-1">Reflexión: ¿Qué dice el texto y qué me quiere decir hoy?</label>
+          <textarea id="dev-reflexion" rows="3" placeholder="Lo que descubres al leerlo..." class="w-full bg-white border border-[#e0d2c6] rounded-xl p-2 font-medium text-stone-800"></textarea>
+        </div>
+        <div>
+          <label class="font-bold text-stone-600 block mb-1">Pregunta de Quiebre / Corrección o Aplicación Práctica</label>
+          <textarea id="dev-aplicacion" rows="2" placeholder="¿Qué actitud o hábito vino a corregir este pasaje en mí hoy?" class="w-full bg-white border border-[#e0d2c6] rounded-xl p-2 font-medium text-stone-800"></textarea>
+        </div>
+        <div>
+          <label class="font-bold text-stone-600 block mb-1">Oración, Gratitud & Desahogo</label>
+          <textarea id="dev-oracion" rows="3" placeholder="Tus palabras hacia Él, gratitud, soltar cargas..." class="w-full bg-white border border-[#e0d2c6] rounded-xl p-2 font-medium text-stone-800"></textarea>
+        </div>
+      </div>
+      <div class="pt-2 flex justify-end space-x-2">
+        <button onclick="closeModal('modal-devocional')" class="px-4 py-2 border rounded-xl text-xs font-bold cursor-pointer">Cancelar</button>
+        <button onclick="saveDevocional()" class="px-4 py-2 bg-[#73826b] text-white rounded-xl text-xs font-black cursor-pointer">Guardar Devocional</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL PÓKER -->
+  <div id="modal-poker" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-overlay hidden">
+    <div class="glass-card-solid rounded-3xl max-w-md w-full p-6 space-y-4 border border-[#e0d2c6]">
+      <div class="flex items-center justify-between pb-2 border-b border-[#e0d2c6]">
+        <h3 class="text-base font-black text-stone-800">♠️ Registrar Sesión de Póker</h3>
+        <button onclick="closeModal('modal-poker')" class="text-stone-400 font-bold cursor-pointer">✕</button>
+      </div>
+      <div class="space-y-3 text-xs">
+        <input type="hidden" id="poker-edit-id">
+        <div><label class="font-bold text-stone-600 block mb-1">Fecha</label><input type="date" id="poker-date" class="w-full bg-white border border-[#e0d2c6] rounded-xl px-3 py-2 font-bold"></div>
+        <div class="grid grid-cols-2 gap-2">
+          <div><label class="font-bold text-stone-600 block mb-1">Net Won (€/$)</label><input type="number" step="0.01" id="poker-net" placeholder="-88.36" class="w-full bg-white border border-[#e0d2c6] rounded-xl px-3 py-2 font-bold"></div>
+          <div><label class="font-bold text-stone-600 block mb-1">EV / Adjusted</label><input type="number" step="0.01" id="poker-ev" placeholder="-35.00" class="w-full bg-white border border-[#e0d2c6] rounded-xl px-3 py-2 font-bold"></div>
+        </div>
+        <div><label class="font-bold text-stone-600 block mb-1">Sensaciones / Cool-Down</label><textarea id="poker-sensaciones" rows="2" class="w-full bg-white border border-[#e0d2c6] rounded-xl p-2 font-medium"></textarea></div>
+      </div>
+      <div class="pt-2 flex justify-end space-x-2">
+        <button onclick="closeModal('modal-poker')" class="px-4 py-2 border rounded-xl text-xs font-bold cursor-pointer">Cancelar</button>
+        <button onclick="savePokerSession()" class="px-4 py-2 bg-[#a37059] text-white rounded-xl text-xs font-black cursor-pointer">Guardar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL EXPORTAR RESPALDO -->
+  <div id="modal-export" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-overlay hidden">
+    <div class="glass-card-solid rounded-3xl max-w-sm w-full p-5 space-y-3 shadow-2xl border border-[#e0d2c6]">
+      <h3 class="text-sm font-black text-stone-800 text-center">📤 Copiar Código de Datos</h3>
+      <textarea id="export-textarea" class="w-full h-32 bg-white border border-[#e0d2c6] rounded-2xl p-2 text-[10px] font-mono text-stone-700 outline-none resize-none" readonly></textarea>
+      <div class="flex justify-between pt-2">
+        <button onclick="closeModal('modal-export')" class="px-4 py-1.5 bg-stone-100 rounded-xl text-xs font-bold cursor-pointer">Cerrar</button>
+        <button onclick="copyExportText()" class="px-4 py-1.5 bg-[#a37059] text-white rounded-xl text-xs font-black cursor-pointer">📋 Copiar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL IMPORTAR RESPALDO -->
+  <div id="modal-import" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-overlay hidden">
+    <div class="glass-card-solid rounded-3xl max-w-sm w-full p-5 space-y-3 shadow-2xl border border-[#e0d2c6]">
+      <h3 class="text-sm font-black text-stone-800 text-center">📥 Sincronizar Datos</h3>
+      <textarea id="import-textarea" placeholder="Pega el código aquí..." class="w-full h-32 bg-white border border-[#e0d2c6] rounded-2xl p-2 text-[10px] font-mono text-stone-700 outline-none resize-none"></textarea>
+      <div class="flex justify-between pt-2">
+        <button onclick="closeModal('modal-import')" class="px-4 py-1.5 bg-stone-100 rounded-xl text-xs font-bold cursor-pointer">Cancelar</button>
+        <button onclick="applyImportText()" class="px-4 py-1.5 bg-[#73826b] text-white rounded-xl text-xs font-black cursor-pointer">✨ Restaurar</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="fixed bottom-5 right-5 z-50 bg-[#38322c] text-white px-4 py-2.5 rounded-2xl shadow-xl text-xs font-bold flex items-center space-x-2 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none border border-white/20">
+    <span>✨</span>
+    <span id="toast-text">Acción completada</span>
+  </div>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyCnhvfyXpwJdYOQFCvsyHDhgw9F3X7ARR4",
+      authDomain: "marpk-816dd.firebaseapp.com",
+      projectId: "marpk-816dd",
+      storageBucket: "marpk-816dd.firebasestorage.app",
+      messagingSenderId: "189644122232",
+      appId: "1:189644122232:web:ed7894f1510a373d44658d",
+      measurementId: "G-G1948VXPT6"
+    };
+
+    let db = null;
+    let isCloudReady = false;
+    try {
+      firebase.initializeApp(firebaseConfig);
+      db = firebase.firestore();
+      isCloudReady = true;
+    } catch (e) { console.warn("Firebase:", e); }
+
+    const STORAGE_KEY = 'MARY_LIFESTYLE_SUITE_V2';
+
+    let maryData = {
+      metas: { calMin: 1600, calMax: 1700, protMin: 80, protMax: 140, cardio: 30, agua: 2.0 },
+      customGoals: [],
+      alimentacion: [],
+      cardio: [],
+      entrenamiento: [],
+      salud: [],
+      pesos: [],
+      medidas: [],
+      fotos: [],
+      poker: [],
+      devocionales: [],
+      bibleProgress: {},
+      _updatedAt: 0
+    };
+
+    const BIBLE_BOOKS = {
+      "Antiguo Testamento": ["Génesis", "Éxodo", "Levítico", "Números", "Deuteronomio", "Josué", "Jueces", "Rut", "1 Samuel", "2 Samuel", "1 Reyes", "2 Reyes", "1 Crónicas", "2 Crónicas", "Esdras", "Nehemías", "Ester", "Job", "Salmos", "Proverbios", "Eclesiastés", "Cantares", "Isaías", "Jeremías", "Lamentaciones", "Ezequiel", "Daniel", "Oseas", "Joel", "Amós", "Abdías", "Jonás", "Miqueas", "Nahúm", "Habacuc", "Sofonías", "Hageo", "Zacarías", "Malaquías"],
+      "Nuevo Testamento": ["Mateo", "Marcos", "Lucas", "Juan", "Hechos", "Romanos", "1 Corintios", "2 Corintios", "Gálatas", "Efesios", "Filipenses", "Colosenses", "1 Tesalonicenses", "2 Tesalonicenses", "1 Timoteo", "2 Timoteo", "Tito", "Filemón", "Hebreos", "Santiago", "1 Pedro", "2 Pedro", "1 Juan", "2 Juan", "3 Juan", "Judas", "Apocalipsis"]
+    };
+
+    async function initApp() {
+      const today = new Date().toISOString().slice(0, 10);
+      const thirtyDaysAgo = new Date(); thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+      const startStr = thirtyDaysAgo.toISOString().slice(0, 10);
+      
+      ['res-from', 'al-from', 'ca-from', 'en-from', 'sa-from', 'dev-from'].forEach(id => {
+        const el = document.getElementById(id);
+        if(el) el.value = startStr;
+      });
+      ['res-to', 'al-to', 'ca-to', 'en-to', 'sa-to', 'dev-to'].forEach(id => {
+        const el = document.getElementById(id);
+        if(el) el.value = today;
+      });
+
+      const pDate = document.getElementById('peso-date'); if(pDate) pDate.value = today;
+      const fDate = document.getElementById('foto-date'); if(fDate) fDate.value = today;
+      const pkDate = document.getElementById('poker-date'); if(pkDate) pkDate.value = today;
+      const devDate = document.getElementById('dev-date'); if(devDate) devDate.value = today;
+
+      await loadDatabase();
+      renderAllViews();
+    }
+
+    async function loadDatabase() {
+      loadDatabaseLocal();
+      const localTimestamp = maryData._updatedAt || 0;
+
+      try {
+        if (isCloudReady && db) {
+          const doc = await db.collection("mary_lifestyle").doc("user_data").get();
+          if (doc.exists) {
+            const cloudData = doc.data();
+            const cloudTimestamp = cloudData._updatedAt || 0;
+            if (cloudTimestamp >= localTimestamp) {
+              maryData = Object.assign({}, maryData, cloudData);
+              localStorage.setItem(STORAGE_KEY, JSON.stringify(maryData));
+            } else {
+              db.collection("mary_lifestyle").doc("user_data").set(maryData).catch(e => console.warn(e));
+            }
+          }
+        }
+      } catch (e) { console.warn(e); }
+
+      if (!maryData.bibleProgress) maryData.bibleProgress = {};
+    }
+
+    function loadDatabaseLocal() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (raw) maryData = Object.assign({}, maryData, JSON.parse(raw));
+      } catch (e) { console.warn(e); }
+    }
+
+    function saveDatabase() {
+      try {
+        maryData._updatedAt = Date.now();
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(maryData));
+        if (isCloudReady && db) {
+          const cloudPayload = {
+            ...maryData,
+            fotos: maryData.fotos.map(f => ({ ...f, url: '' })),
+            poker: maryData.poker.map(p => ({ ...p, url: '' }))
+          };
+          db.collection("mary_lifestyle").doc("user_data").set(cloudPayload).catch(e => console.warn(e));
+        }
+      } catch (e) { console.error(e); }
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('toast'), txt = document.getElementById('toast-text');
+      if (!t || !txt) return;
+      txt.innerText = msg;
+      t.classList.remove('translate-y-20', 'opacity-0');
+      setTimeout(() => t.classList.add('translate-y-20', 'opacity-0'), 2500);
+    }
+
+    function openModal(id) { const m = document.getElementById(id); if (m) { m.classList.remove('hidden'); m.style.display = 'flex'; } }
+    function closeModal(id) { const m = document.getElementById(id); if (m) { m.classList.add('hidden'); m.style.display = 'none'; } }
+
+    function switchTab(tabId) {
+      ['resumen', 'alimentacion', 'cardio', 'entrenamiento', 'calendario', 'peso', 'poker', 'espiritual'].forEach(id => {
+        const pane = document.getElementById(`pane-${id}`);
+        const btn = document.getElementById(`tab-btn-${id}`);
+        if (pane) { if (id === tabId) pane.classList.remove('hidden'); else pane.classList.add('hidden'); }
+        if (btn) { if (id === tabId) btn.classList.add('active'); else btn.classList.remove('active'); }
+      });
+      renderAllViews();
+    }
+
+    function saveDevocional() {
+      const editId = document.getElementById('dev-edit-id').value;
+      const item = {
+        id: editId ? parseInt(editId) : Date.now(),
+        date: document.getElementById('dev-date').value,
+        version: document.getElementById('dev-version').value,
+        pasaje: document.getElementById('dev-pasaje').value || 'Sin pasaje',
+        tiempo: parseInt(document.getElementById('dev-tiempo').value || 0),
+        textoLiteral: document.getElementById('dev-texto-literal').value,
+        ancla: document.getElementById('dev-ancla').value,
+        reflexion: document.getElementById('dev-reflexion').value,
+        aplicacion: document.getElementById('dev-aplicacion').value,
+        oracion: document.getElementById('dev-oracion').value
+      };
+
+      if (editId) {
+        maryData.devocionales = maryData.devocionales.map(x => x.id === parseInt(editId) ? item : x);
+      } else {
+        maryData.devocionales.push(item);
+      }
+      saveDatabase(); closeModal('modal-devocional'); renderAllViews(); showToast('🕊️ Devocional guardado');
+    }
+
+    function editDevocional(id) {
+      const item = maryData.devocionales.find(x => x.id === id);
+      if(!item) return;
+      document.getElementById('dev-edit-id').value = item.id;
+      document.getElementById('dev-date').value = item.date;
+      document.getElementById('dev-version').value = item.version;
+      document.getElementById('dev-pasaje').value = item.pasaje;
+      document.getElementById('dev-tiempo').value = item.tiempo;
+      document.getElementById('dev-texto-literal').value = item.textoLiteral || '';
+      document.getElementById('dev-ancla').value = item.ancla || '';
+      document.getElementById('dev-reflexion').value = item.reflexion || '';
+      document.getElementById('dev-aplicacion').value = item.aplicacion || '';
+      document.getElementById('dev-oracion').value = item.oracion || '';
+      openModal('modal-devocional');
+    }
+
+    function deleteDevocional(id) {
+      maryData.devocionales = maryData.devocionales.filter(x => x.id !== id);
+      saveDatabase(); renderAllViews(); showToast('Devocional eliminado');
+    }
+
+    function toggleBibleBook(bookName) {
+      maryData.bibleProgress[bookName] = !maryData.bibleProgress[bookName];
+      saveDatabase(); renderBibleTracker();
+    }
+
+    function renderBibleTracker() {
+      const container = document.getElementById('bible-tracker-container');
+      if(!container) return;
+      container.innerHTML = '';
+
+      for (let testamento in BIBLE_BOOKS) {
+        let booksHtml = '';
+        BIBLE_BOOKS[testamento].forEach(book => {
+          const isChecked = !!maryData.bibleProgress[book];
+          booksHtml += `
+            <label class="flex items-center space-x-2 cursor-pointer hover:bg-white/60 p-1 rounded-lg transition">
+              <input type="checkbox" ${isChecked ? 'checked' : ''} onchange="toggleBibleBook('${book}')" class="accent-[#73826b] w-3.5 h-3.5 rounded">
+              <span class="${isChecked ? 'line-through text-stone-400 font-normal' : 'text-stone-700 font-bold'} text-[11px]">${book}</span>
+            </label>`;
+        });
+
+        container.innerHTML += `
+          <div class="glass-card p-4 rounded-2xl space-y-2">
+            <h5 class="font-black text-stone-800 text-xs uppercase tracking-wider pb-1 border-b border-[#e0d2c6]">${testamento}</h5>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-1">${booksHtml}</div>
+          </div>`;
+      }
+    }
+
+    function renderDevocionalHistory() {
+      const container = document.getElementById('devocional-history-list');
+      if(!container) return;
+      container.innerHTML = '';
+
+      const from = document.getElementById('dev-from') ? document.getElementById('dev-from').value : '';
+      const to = document.getElementById('dev-to') ? document.getElementById('dev-to').value : '';
+
+      const sorted = [...maryData.devocionales]
+        .filter(d => (!from || d.date >= from) && (!to || d.date <= to))
+        .sort((a,b)=>b.date.localeCompare(a.date));
+
+      if(sorted.length === 0) {
+        container.innerHTML = `<p class="text-xs text-stone-400 text-center py-4">No hay devocionales escritos en este rango de fechas.</p>`;
+        return;
+      }
+
+      sorted.forEach(d => {
+        container.innerHTML += `
+          <div class="glass-card p-5 rounded-3xl space-y-3 text-xs border-l-4 border-l-[#73826b]">
+            <div class="flex justify-between items-center pb-2 border-b border-[#e0d2c6]">
+              <div>
+                <strong class="text-sm font-black text-stone-800">📖 ${d.pasaje}</strong>
+                <span class="text-[10px] text-stone-500 block">📅 ${d.date} · Versión: ${d.version} (${d.tiempo || 0} min)</span>
+              </div>
+              <div class="flex items-center gap-1">
+                <button onclick="editDevocional(${d.id})" class="px-2 py-1 bg-white border border-[#e0d2c6] rounded-xl font-bold cursor-pointer">✏️</button>
+                <button onclick="deleteDevocional(${d.id})" class="text-red-500 font-bold px-1.5 cursor-pointer">✕</button>
+              </div>
+            </div>
+
+            ${d.textoLiteral ? `<div class="bg-white/70 p-3 rounded-2xl italic text-stone-700 border border-[#e0d2c6]">"${d.textoLiteral}"</div>` : ''}
+            ${d.ancla ? `<p>⚓ <strong>Versículo Ancla:</strong> <span class="text-[#a37059] font-bold">${d.ancla}</span></p>` : ''}
+            ${d.reflexion ? `<p>💡 <strong>Reflexión:</strong> ${d.reflexion}</p>` : ''}
+            ${d.aplicacion ? `<p>⚡ <strong>Aplicación / Corrección:</strong> ${d.aplicacion}</p>` : ''}
+            ${d.oracion ? `<div class="bg-[#f4ede6]/60 p-3 rounded-2xl space-y-1"><p class="font-bold text-stone-700">🙏 Oración, Gratitud & Desahogo:</p><p class="text-stone-600">${d.oracion}</p></div>` : ''}
+          </div>`;
+      });
+    }
+
+    function savePesoLog() {
+      const date = document.getElementById('peso-date').value;
+      const kg = parseFloat(document.getElementById('peso-kg').value || 0);
+      const nota = document.getElementById('peso-nota').value;
+      if (!date || !kg) { showToast('Ingresa fecha y peso'); return; }
+      maryData.pesos.push({ id: Date.now(), date, kg, nota });
+      saveDatabase(); document.getElementById('peso-kg').value = ''; document.getElementById('peso-nota').value = '';
+      renderBiometriaView(); showToast('⚖️ Peso guardado');
+    }
+    function saveFotoLog() {
+      const date = document.getElementById('foto-date').value;
+      const pose = document.getElementById('foto-pose').value;
+      const fileInput = document.getElementById('foto-file');
+      if (!date || !fileInput.files || fileInput.files.length === 0) { showToast('Selecciona imagen'); return; }
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        maryData.fotos.push({ id: Date.now(), date, pose, url: e.target.result });
+        saveDatabase(); fileInput.value = ''; renderBiometriaView(); showToast('📸 Foto guardada');
+      };
+      reader.readAsDataURL(fileInput.files[0]);
+    }
+    function deleteBiometriaItem(type, id) {
+      maryData[type] = maryData[type].filter(x => x.id !== id);
+      saveDatabase(); renderBiometriaView(); showToast('Eliminado');
+    }
+    function renderBiometriaView() {
+      const listContainer = document.getElementById('peso-history-list');
+      const badge = document.getElementById('peso-promedio-badge');
+      if(!listContainer) return;
+      listContainer.innerHTML = '';
+      const sorted = [...maryData.pesos].sort((a,b)=>b.date.localeCompare(a.date));
+      if(sorted.length === 0) { listContainer.innerHTML = `<p class="text-xs text-stone-400 text-center">Sin registros.</p>`; if(badge) badge.innerText = `Promedio: -- kg`; return; }
+      const avg = (sorted.slice(0,7).reduce((acc,cur)=>acc+cur.kg,0)/Math.min(sorted.length,7)).toFixed(1);
+      if(badge) badge.innerText = `Promedio Semanal: ${avg} kg`;
+      sorted.forEach(p => {
+        listContainer.innerHTML += `<div class="glass-card p-2 rounded-xl flex justify-between items-center text-xs"><span>📅 ${p.date} · ${p.kg}kg</span><button onclick="deleteBiometriaItem('pesos', ${p.id})" class="text-red-500 font-bold">✕</button></div>`;
+      });
+      
+      const grid = document.getElementById('foto-gallery-grid');
+      if(grid) {
+        grid.innerHTML = '';
+        const grouped = {};
+        maryData.fotos.forEach(f => { if(!grouped[f.date]) grouped[f.date] = {}; grouped[f.date][f.pose] = f; });
+        Object.keys(grouped).sort((a,b)=>b.localeCompare(a)).forEach(date => {
+          let posesHtml = '';
+          ['Frente', 'Lado', 'Espalda'].forEach(pose => {
+            const photo = grouped[date][pose];
+            posesHtml += photo ? `<div class="space-y-1"><span class="text-xs font-bold block text-center">${pose}</span><img src="${photo.url}" class="w-full h-64 object-cover rounded-2xl border"></div>` : `<div class="space-y-1"><span class="text-xs text-stone-400 block text-center">${pose} (-)</span><div class="h-64 rounded-2xl border border-dashed flex items-center justify-center text-stone-300">·</div></div>`;
+          });
+          grid.innerHTML += `<div class="glass-card p-4 rounded-3xl space-y-3"><strong class="text-xs font-black">📅 ${date}</strong><div class="grid grid-cols-1 sm:grid-cols-3 gap-3">${posesHtml}</div></div>`;
+        });
+      }
+    }
+
+    function renderAllViews() {
+      renderBiometriaView();
+      renderBibleTracker();
+      renderDevocionalHistory();
+    }
+
+    document.addEventListener('DOMContentLoaded', initApp);
+  </script>
+</body>
+</html>
