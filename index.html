@@ -142,7 +142,7 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="bible-progress-bars"></div>
       </div>
 
-      <!-- ESTANTERÍA BÍBLICA CON SELECTOR DE COLOR INFINITO -->
+      <!-- ESTANTERÍA BÍBLICA -->
       <div class="glass-card-solid p-6 rounded-3xl space-y-4">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-pink-200">
           <div>
@@ -796,7 +796,7 @@
 
       const from = document.getElementById('dev-from') ? document.getElementById('dev-from').value : '';
       const to = document.getElementById('dev-to') ? document.getElementById('dev-to').value : '';
-      const query = document.getElementById('dev-search') ? document.getElementById('dev-search'].value.toLowerCase().trim() : '';
+      const query = document.getElementById('dev-search') ? document.getElementById('dev-search').value.toLowerCase().trim() : '';
 
       const sorted = [...appData.devocionales]
         .filter(d => {
