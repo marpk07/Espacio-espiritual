@@ -63,17 +63,6 @@
       backdrop-filter: blur(6px);
       z-index: 99999 !important;
     }
-
-    .color-btn {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      border: 2px solid white;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.15);
-      cursor: pointer;
-      transition: transform 0.2s;
-    }
-    .color-btn:hover { transform: scale(1.15); }
   </style>
 </head>
 <body class="min-h-screen flex flex-col antialiased">
@@ -124,6 +113,9 @@
         <button onclick="openModalDevocional()" class="px-5 py-2.5 bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white font-extrabold text-xs rounded-xl shadow-lg transition cursor-pointer">+ Nuevo Devocional</button>
       </div>
 
+      <!-- PANEL DE RESUMEN / ESTADÍSTICAS DEL PERIODO -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4" id="dev-stats-kpis"></div>
+
       <!-- FILTROS Y BUSCADOR -->
       <div class="glass-card p-4 rounded-2xl flex flex-wrap items-center gap-3 text-xs">
         <div class="flex items-center space-x-2">
@@ -150,23 +142,18 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="bible-progress-bars"></div>
       </div>
 
-      <!-- ESTANTERÍA BÍBLICA -->
+      <!-- ESTANTERÍA BÍBLICA CON SELECTOR DE COLOR INFINITO -->
       <div class="glass-card-solid p-6 rounded-3xl space-y-4">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-pink-200">
           <div>
             <h3 class="font-black text-rose-900 text-sm uppercase tracking-wider">📚 Estantería de Libros (Pinta tus lecturas)</h3>
-            <p class="text-[11px] text-rose-600">Selecciona un color abajo y haz clic en cualquier libro para pintarlo cuando lo leas.</p>
+            <p class="text-[11px] text-rose-600">Escoge cualquier color abajo y haz clic en un libro para pintarlo.</p>
           </div>
-          <!-- PALETA DE COLORES -->
+          <!-- SELECTOR DE COLOR PERSONALIZADO -->
           <div class="flex items-center gap-2 bg-pink-50 p-2 rounded-2xl border border-pink-200">
-            <span class="text-[10px] font-bold text-rose-900">Color activo:</span>
-            <div onclick="setActiveColor('#f4c2c2')" class="color-btn" style="background-color: #f4c2c2;" title="Rosa Pastel"></div>
-            <div onclick="setActiveColor('#d8b4e2')" class="color-btn" style="background-color: #d8b4e2;" title="Lavanda"></div>
-            <div onclick="setActiveColor('#fde2e4')" class="color-btn" style="background-color: #fde2e4;" title="Rosa Claro"></div>
-            <div onclick="setActiveColor('#e2ece9')" class="color-btn" style="background-color: #e2ece9;" title="Verde Salvia"></div>
-            <div onclick="setActiveColor('#ffe5d9')" class="color-btn" style="background-color: #ffe5d9;" title="Melocotón"></div>
-            <div onclick="setActiveColor('#e4f0d0')" class="color-btn" style="background-color: #e4f0d0;" title="Verde Claro"></div>
-            <div onclick="setActiveColor('transparent')" class="color-btn bg-white border-dashed flex items-center justify-center text-[10px] font-bold text-rose-400" title="Borrar color">✕</div>
+            <span class="text-[11px] font-bold text-rose-900">Color personalizado:</span>
+            <input type="color" id="active-color-picker" value="#f4c2c2" onchange="setActiveColor(this.value)" class="w-8 h-8 rounded-lg border border-pink-300 cursor-pointer bg-white p-0.5" title="Elige tu color exacto">
+            <button onclick="setActiveColor('transparent')" class="px-2.5 py-1 bg-white border border-pink-200 rounded-xl text-[10px] font-bold text-rose-600 hover:bg-pink-100 cursor-pointer">Borrar color</button>
           </div>
         </div>
         <div id="bible-bookshelf-container" class="space-y-6 pt-2"></div>
@@ -265,7 +252,7 @@
     </div>
   </div>
 
-  <!-- MODAL PLAN DE ESTUDIO (SELECCIÓN DE LIBRO Y CAPÍTULOS) -->
+  <!-- MODAL PLAN DE ESTUDIO -->
   <div id="modal-plan" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-overlay hidden">
     <div class="glass-card-solid rounded-3xl max-w-md w-full p-6 space-y-4 border border-pink-200">
       <div class="flex items-center justify-between pb-2 border-b border-pink-200">
@@ -277,7 +264,6 @@
         <div>
           <label class="font-bold text-rose-900 block mb-1">Seleccionar Libro de la Biblia</label>
           <select id="plan-book-select" class="w-full bg-white border border-pink-200 rounded-xl px-3 py-2 font-bold text-rose-900">
-            <!-- Se llena dinámicamente -->
           </select>
         </div>
         <div class="grid grid-cols-2 gap-2">
@@ -344,11 +330,11 @@
       isCloudReady = true;
     } catch (e) { console.warn("Firebase:", e); }
 
-    const STORAGE_KEY = 'MARY_SPIRITUAL_SPACE_V5';
+    const STORAGE_KEY = 'MARY_SPIRITUAL_SPACE_V6';
 
     let appData = {
       devocionales: [],
-      bibleProgress: {}, // { "Isaías": "#f4c2c2", ... }
+      bibleProgress: {},
       studyPlans: [],
       _updatedAt: 0
     };
@@ -374,7 +360,7 @@
 
     function setActiveColor(hex) {
       activeColor = hex;
-      showToast(hex === 'transparent' ? 'Borrador seleccionado' : 'Color seleccionado para pintar');
+      showToast(hex === 'transparent' ? 'Borrador seleccionado' : 'Color personalizado seleccionado');
     }
 
     let calendarYear = new Date().getFullYear();
@@ -413,7 +399,7 @@
 
       try {
         if (isCloudReady && db) {
-          const doc = await db.collection("mary_spiritual").doc("devotional_data_v5").get();
+          const doc = await db.collection("mary_spiritual").doc("devotional_data_v6").get();
           if (doc.exists) {
             const cloudData = doc.data();
             const cloudTimestamp = cloudData._updatedAt || 0;
@@ -421,7 +407,7 @@
               appData = Object.assign({}, appData, cloudData);
               localStorage.setItem(STORAGE_KEY, JSON.stringify(appData));
             } else {
-              db.collection("mary_spiritual").doc("devotional_data_v5").set(appData).catch(e => console.warn(e));
+              db.collection("mary_spiritual").doc("devotional_data_v6").set(appData).catch(e => console.warn(e));
             }
           }
         }
@@ -443,7 +429,7 @@
         appData._updatedAt = Date.now();
         localStorage.setItem(STORAGE_KEY, JSON.stringify(appData));
         if (isCloudReady && db) {
-          db.collection("mary_spiritual").doc("devotional_data_v5").set(appData).catch(e => console.warn(e));
+          db.collection("mary_spiritual").doc("devotional_data_v6").set(appData).catch(e => console.warn(e));
         }
       } catch (e) { console.error(e); }
     }
@@ -641,6 +627,40 @@
       renderAllViews();
     }
 
+    function renderDevStatsKpis() {
+      const container = document.getElementById('dev-stats-kpis');
+      if(!container) return;
+
+      const from = document.getElementById('dev-from') ? document.getElementById('dev-from').value : '';
+      const to = document.getElementById('dev-to') ? document.getElementById('dev-to').value : '';
+
+      const filtered = appData.devocionales.filter(d => {
+        if (from && d.date < from) return false;
+        if (to && d.date > to) return false;
+        return true;
+      });
+
+      const totalDevs = filtered.length;
+      const totalMinutes = filtered.reduce((acc, curr) => acc + (curr.tiempo || 0), 0);
+      const totalHours = (totalMinutes / 60).toFixed(1);
+      const booksReadCount = Object.keys(appData.bibleProgress).length;
+
+      container.innerHTML = `
+        <div class="glass-card p-4 rounded-2xl space-y-1 bg-white/70">
+          <span class="text-[10px] font-extrabold text-rose-600 uppercase">Devocionales Registrados</span>
+          <p class="text-xl font-black text-rose-900">${totalDevs}</p>
+        </div>
+        <div class="glass-card p-4 rounded-2xl space-y-1 bg-white/70">
+          <span class="text-[10px] font-extrabold text-rose-600 uppercase">Tiempo de Lectura</span>
+          <p class="text-xl font-black text-rose-900">${totalHours} h <span class="text-xs font-normal text-rose-500">(${totalMinutes} min)</span></p>
+        </div>
+        <div class="glass-card p-4 rounded-2xl space-y-1 bg-white/70">
+          <span class="text-[10px] font-extrabold text-rose-600 uppercase">Libros Pintados / Leídos</span>
+          <p class="text-xl font-black text-rose-900">${booksReadCount} / 66</p>
+        </div>
+      `;
+    }
+
     function renderBibleProgressBars() {
       const container = document.getElementById('bible-progress-bars');
       if(!container) return;
@@ -772,9 +792,11 @@
       if(!container) return;
       container.innerHTML = '';
 
+      renderDevStatsKpis();
+
       const from = document.getElementById('dev-from') ? document.getElementById('dev-from').value : '';
       const to = document.getElementById('dev-to') ? document.getElementById('dev-to').value : '';
-      const query = document.getElementById('dev-search') ? document.getElementById('dev-search').value.toLowerCase().trim() : '';
+      const query = document.getElementById('dev-search') ? document.getElementById('dev-search'].value.toLowerCase().trim() : '';
 
       const sorted = [...appData.devocionales]
         .filter(d => {
