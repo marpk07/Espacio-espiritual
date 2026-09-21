@@ -18,10 +18,10 @@
     
     body {
       background: 
-        radial-gradient(circle at 10% 15%, rgba(233, 216, 240, 0.7) 0%, transparent 40%),
-        radial-gradient(circle at 90% 85%, rgba(252, 231, 243, 0.6) 0%, transparent 45%),
-        linear-gradient(135deg, #fdfbf7 0%, #f7f2eb 50%, #f0eaf4 100%);
-      color: #4a3b4c;
+        radial-gradient(circle at 10% 15%, rgba(254, 226, 235, 0.9) 0%, transparent 40%),
+        radial-gradient(circle at 90% 85%, rgba(244, 194, 212, 0.8) 0%, transparent 45%),
+        linear-gradient(135deg, #fff5f7 0%, #fed7e2 50%, #fbb6ce 100%);
+      color: #50233b;
       min-height: 100vh;
       margin: 0;
       padding: 0;
@@ -30,21 +30,21 @@
 
     .hidden { display: none !important; }
     ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: #f0eaf4; }
-    ::-webkit-scrollbar-thumb { background: #c29bbd; border-radius: 999px; }
+    ::-webkit-scrollbar-track { background: #ffe4e6; }
+    ::-webkit-scrollbar-thumb { background: #f472b6; border-radius: 999px; }
 
     .glass-card {
       background: rgba(255, 255, 255, 0.88);
       backdrop-filter: blur(16px);
-      border: 1px solid rgba(214, 185, 208, 0.7);
-      box-shadow: 0 15px 35px rgba(90, 60, 85, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(244, 114, 182, 0.4);
+      box-shadow: 0 15px 35px rgba(219, 39, 119, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.9);
     }
 
     .glass-card-solid {
       background: rgba(255, 255, 255, 0.96);
       backdrop-filter: blur(16px);
-      border: 1px solid rgba(200, 168, 195, 0.9);
-      box-shadow: 0 20px 40px rgba(90, 60, 85, 0.1), inset 0 1px 0 rgba(255, 255, 255, 1);
+      border: 1px solid rgba(244, 114, 182, 0.5);
+      box-shadow: 0 20px 40px rgba(219, 39, 119, 0.12), inset 0 1px 0 rgba(255, 255, 255, 1);
     }
 
     .nav-btn {
@@ -52,14 +52,14 @@
       cursor: pointer;
     }
     .nav-btn.active {
-      background: linear-gradient(135deg, #9d759b 0%, #7b5379) !important;
+      background: linear-gradient(135deg, #db2777 0%, #be185d) !important;
       color: #ffffff !important;
       font-weight: 800;
-      box-shadow: 0 6px 20px rgba(157, 117, 155, 0.35);
+      box-shadow: 0 6px 20px rgba(219, 39, 119, 0.4);
     }
 
     .modal-overlay {
-      background-color: rgba(74, 59, 76, 0.55);
+      background-color: rgba(80, 35, 59, 0.55);
       backdrop-filter: blur(6px);
       z-index: 99999 !important;
     }
@@ -74,48 +74,40 @@
       transition: transform 0.2s;
     }
     .color-btn:hover { transform: scale(1.15); }
-    .color-btn.selected { transform: scale(1.25); ring: 2px solid #9d759b; border-color: #4a3b4c; }
   </style>
 </head>
 <body class="min-h-screen flex flex-col antialiased">
 
-  <!-- HEADER CON ARTE VECTORIAL (SVG) -->
-  <header class="glass-card-solid sticky top-0 z-40 border-b border-[#e2d0de]">
+  <!-- HEADER -->
+  <header class="glass-card-solid sticky top-0 z-40 border-b border-pink-200">
     <div class="max-w-6xl mx-auto px-4 py-3 flex flex-col sm:flex-row items-center justify-between gap-3">
       <div class="flex items-center space-x-3">
-        <!-- SVG de una Biblia Abierta Decorativa -->
-        <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#9d759b] to-[#c29bbd] flex items-center justify-center text-white shadow-lg">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/>
-            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/>
-            <path d="M12 6v12"/><path d="M16 8h-3"/><path d="M16 12h-3"/>
-          </svg>
-        </div>
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-pink-500 to-rose-500 flex items-center justify-center font-black text-white text-lg shadow-lg">🕊️</div>
         <div>
-          <h1 class="text-base font-black tracking-wider uppercase text-stone-800 leading-none">ESPACIO <span class="text-[#9d759b] text-xs font-bold">ESPIRITUAL</span></h1>
-          <p class="text-[11px] font-medium text-stone-500 italic mt-0.5">"Tu palabra es lámpara a mis pies" (Salmo 119:105)</p>
+          <h1 class="text-base font-black tracking-wider uppercase text-rose-900 leading-none">ESPACIO <span class="text-pink-600 text-xs font-bold">ESPIRITUAL</span></h1>
+          <p class="text-[11px] font-medium text-rose-500 italic mt-0.5">"Tu palabra es lámpara a mis pies" (Salmo 119:105)</p>
         </div>
       </div>
 
-      <nav class="flex flex-wrap items-center justify-center gap-1.5 bg-[#f0eaf4] p-1.5 rounded-2xl border border-[#e2d0de]">
-        <button onclick="switchTab('diario')" id="tab-btn-diario" class="nav-btn active px-3.5 py-1.5 rounded-xl font-bold text-xs text-stone-600">📖 Diario & Notas</button>
-        <button onclick="switchTab('tracker')" id="tab-btn-tracker" class="nav-btn px-3.5 py-1.5 rounded-xl font-bold text-xs text-stone-600">📚 Progreso & Estantería</button>
-        <button onclick="switchTab('calendario')" id="tab-btn-calendario" class="nav-btn px-3.5 py-1.5 rounded-xl font-bold text-xs text-stone-600">🗓️ Calendario</button>
-        <button onclick="switchTab('planes')" id="tab-btn-planes" class="nav-btn px-3.5 py-1.5 rounded-xl font-bold text-xs text-stone-600">📝 Planes de Estudio</button>
+      <nav class="flex flex-wrap items-center justify-center gap-1.5 bg-pink-50 p-1.5 rounded-2xl border border-pink-200">
+        <button onclick="switchTab('diario')" id="tab-btn-diario" class="nav-btn active px-3.5 py-1.5 rounded-xl font-bold text-xs text-rose-900">📖 Diario & Notas</button>
+        <button onclick="switchTab('tracker')" id="tab-btn-tracker" class="nav-btn px-3.5 py-1.5 rounded-xl font-bold text-xs text-rose-900">📚 Progreso & Estantería</button>
+        <button onclick="switchTab('calendario')" id="tab-btn-calendario" class="nav-btn px-3.5 py-1.5 rounded-xl font-bold text-xs text-rose-900">🗓️ Calendario</button>
+        <button onclick="switchTab('planes')" id="tab-btn-planes" class="nav-btn px-3.5 py-1.5 rounded-xl font-bold text-xs text-rose-900">📝 Planes de Estudio</button>
       </nav>
 
       <div class="flex items-center space-x-2">
-        <span class="text-[9px] font-extrabold px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300">☁️ Sincronizado</span>
+        <span class="text-[9px] font-extrabold px-2.5 py-1 rounded-full bg-pink-100 text-pink-800 border border-pink-300">☁️ Sincronizado</span>
       </div>
     </div>
   </header>
 
   <!-- BARRA DE RESPALDO MANUAL -->
-  <div class="bg-[#f7f2eb] border-b border-[#e2d0de] px-4 py-2 flex justify-between items-center text-xs font-bold text-stone-700 max-w-6xl mx-auto w-full">
+  <div class="bg-pink-100/60 border-b border-pink-200 px-4 py-2 flex justify-between items-center text-xs font-bold text-rose-900 max-w-6xl mx-auto w-full">
     <span>🔄 Sincronización Celular ⇄ PC:</span>
     <div class="space-x-3">
-      <button onclick="openExportModal()" class="text-[#9d759b] hover:underline cursor-pointer">📤 Copiar Código</button>
-      <button onclick="openImportModal()" class="text-[#7b5379] hover:underline cursor-pointer">📥 Pegar y Restaurar</button>
+      <button onclick="openExportModal()" class="text-pink-600 hover:underline cursor-pointer">📤 Copiar Código</button>
+      <button onclick="openImportModal()" class="text-rose-600 hover:underline cursor-pointer">📥 Pegar y Restaurar</button>
     </div>
   </div>
 
@@ -126,55 +118,55 @@
     <section id="pane-diario" class="tab-pane space-y-6">
       <div class="glass-card rounded-3xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h2 class="text-lg font-black text-stone-800">📖 Diario Devocional & Estudio</h2>
-          <p class="text-xs text-stone-500">Reflexiones temáticas, oración, gratitud y desahogo separados</p>
+          <h2 class="text-lg font-black text-rose-900">📖 Diario Devocional & Estudio</h2>
+          <p class="text-xs text-rose-600">Tus reflexiones ordenadas por temas, oración, gratitud y desahogo</p>
         </div>
-        <button onclick="openModalDevocional()" class="px-5 py-2.5 bg-gradient-to-r from-[#9d759b] to-[#7b5379] hover:opacity-95 text-white font-extrabold text-xs rounded-xl shadow-lg transition cursor-pointer">+ Nuevo Devocional</button>
+        <button onclick="openModalDevocional()" class="px-5 py-2.5 bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white font-extrabold text-xs rounded-xl shadow-lg transition cursor-pointer">+ Nuevo Devocional</button>
       </div>
 
-      <!-- FILTROS Y BUSCADOR POR TEMA O PALABRA CLAVE -->
+      <!-- FILTROS Y BUSCADOR -->
       <div class="glass-card p-4 rounded-2xl flex flex-wrap items-center gap-3 text-xs">
         <div class="flex items-center space-x-2">
-          <span class="font-bold text-stone-700">🔍 Desde:</span>
-          <input type="date" id="dev-from" onchange="renderDevocionalHistory()" class="bg-white border border-[#e2d0de] rounded-xl px-2.5 py-1.5 font-bold text-stone-800">
+          <span class="font-bold text-rose-900">🔍 Desde:</span>
+          <input type="date" id="dev-from" onchange="renderDevocionalHistory()" class="bg-white border border-pink-200 rounded-xl px-2.5 py-1.5 font-bold text-rose-900">
         </div>
         <div class="flex items-center space-x-2">
-          <span class="font-bold text-stone-700">Hasta:</span>
-          <input type="date" id="dev-to" onchange="renderDevocionalHistory()" class="bg-white border border-[#e2d0de] rounded-xl px-2.5 py-1.5 font-bold text-stone-800">
+          <span class="font-bold text-rose-900">Hasta:</span>
+          <input type="date" id="dev-to" onchange="renderDevocionalHistory()" class="bg-white border border-pink-200 rounded-xl px-2.5 py-1.5 font-bold text-rose-900">
         </div>
         <div class="flex-1 min-w-[220px]">
-          <input type="text" id="dev-search" oninput="renderDevocionalHistory()" placeholder="🔎 Buscar por tema, palabra (ej. sabiduría, miedo)..." class="w-full bg-white border border-[#e2d0de] rounded-xl px-3 py-1.5 font-bold text-stone-800">
+          <input type="text" id="dev-search" oninput="renderDevocionalHistory()" placeholder="🔎 Buscar por tema, palabra (ej. sabiduría, miedo)..." class="w-full bg-white border border-pink-200 rounded-xl px-3 py-1.5 font-bold text-rose-900">
         </div>
       </div>
 
-      <!-- HISTORIAL DE DEVOCIONALES -->
+      <!-- HISTORIAL -->
       <div class="space-y-4" id="devocional-history-list"></div>
     </section>
 
     <!-- PESTAÑA 2: TRACKER & ESTANTERÍA -->
     <section id="pane-tracker" class="tab-pane space-y-6 hidden">
       <div class="glass-card-solid p-6 rounded-3xl space-y-4">
-        <h3 class="font-black text-stone-800 text-sm uppercase tracking-wider">📊 Progreso General de Lectura Bíblica</h3>
+        <h3 class="font-black text-rose-900 text-sm uppercase tracking-wider">📊 Progreso General de Lectura Bíblica</h3>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="bible-progress-bars"></div>
       </div>
 
-      <!-- ESTANTERÍA BÍBLICA POR CATEGORÍAS CON PALETA DE COLORES -->
+      <!-- ESTANTERÍA BÍBLICA -->
       <div class="glass-card-solid p-6 rounded-3xl space-y-4">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-[#e2d0de]">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-pink-200">
           <div>
-            <h3 class="font-black text-stone-800 text-sm uppercase tracking-wider">📚 Estantería de Libros (Pinta tus lecturas)</h3>
-            <p class="text-[11px] text-stone-500">Selecciona un color abajo y haz clic en cualquier libro para pintarlo cuando lo leas.</p>
+            <h3 class="font-black text-rose-900 text-sm uppercase tracking-wider">📚 Estantería de Libros (Pinta tus lecturas)</h3>
+            <p class="text-[11px] text-rose-600">Selecciona un color abajo y haz clic en cualquier libro para pintarlo cuando lo leas.</p>
           </div>
-          <!-- PALETA DE COLORES PARA PINTAR LIBROS -->
-          <div class="flex items-center gap-2 bg-[#f0eaf4] p-2 rounded-2xl border border-[#e2d0de]">
-            <span class="text-[10px] font-bold text-stone-600">Color activo:</span>
+          <!-- PALETA DE COLORES -->
+          <div class="flex items-center gap-2 bg-pink-50 p-2 rounded-2xl border border-pink-200">
+            <span class="text-[10px] font-bold text-rose-900">Color activo:</span>
             <div onclick="setActiveColor('#f4c2c2')" class="color-btn" style="background-color: #f4c2c2;" title="Rosa Pastel"></div>
             <div onclick="setActiveColor('#d8b4e2')" class="color-btn" style="background-color: #d8b4e2;" title="Lavanda"></div>
             <div onclick="setActiveColor('#fde2e4')" class="color-btn" style="background-color: #fde2e4;" title="Rosa Claro"></div>
             <div onclick="setActiveColor('#e2ece9')" class="color-btn" style="background-color: #e2ece9;" title="Verde Salvia"></div>
             <div onclick="setActiveColor('#ffe5d9')" class="color-btn" style="background-color: #ffe5d9;" title="Melocotón"></div>
             <div onclick="setActiveColor('#e4f0d0')" class="color-btn" style="background-color: #e4f0d0;" title="Verde Claro"></div>
-            <div onclick="setActiveColor('transparent')" class="color-btn bg-white border-dashed flex items-center justify-center text-[10px] font-bold text-stone-400" title="Borrar color">✕</div>
+            <div onclick="setActiveColor('transparent')" class="color-btn bg-white border-dashed flex items-center justify-center text-[10px] font-bold text-rose-400" title="Borrar color">✕</div>
           </div>
         </div>
         <div id="bible-bookshelf-container" class="space-y-6 pt-2"></div>
@@ -184,15 +176,15 @@
     <!-- PESTAÑA 3: CALENDARIO -->
     <section id="pane-calendario" class="tab-pane space-y-6 hidden">
       <div class="glass-card-solid rounded-3xl p-6 space-y-4">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-[#e2d0de]">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-pink-200">
           <div>
-            <h3 class="text-base font-black text-stone-800">🗓️ Calendario Devocional</h3>
-            <p class="text-xs text-stone-500">Días en los que tuviste tu tiempo con Dios</p>
+            <h3 class="text-base font-black text-rose-900">🗓️ Calendario Devocional</h3>
+            <p class="text-xs text-rose-600">Días en los que tuviste tu tiempo con Dios</p>
           </div>
           <div class="flex items-center space-x-2">
-            <button onclick="changeCalendarMonth(-1)" class="px-3 py-1 bg-white border border-[#e2d0de] rounded-xl font-bold text-xs cursor-pointer">◀ Mes Anterior</button>
-            <span id="calendar-month-label" class="text-xs font-black uppercase text-stone-800 px-2"></span>
-            <button onclick="changeCalendarMonth(1)" class="px-3 py-1 bg-white border border-[#e2d0de] rounded-xl font-bold text-xs cursor-pointer">Mes Siguiente ▶</button>
+            <button onclick="changeCalendarMonth(-1)" class="px-3 py-1 bg-white border border-pink-200 rounded-xl font-bold text-xs cursor-pointer text-rose-900">◀ Mes Anterior</button>
+            <span id="calendar-month-label" class="text-xs font-black uppercase text-rose-900 px-2"></span>
+            <button onclick="changeCalendarMonth(1)" class="px-3 py-1 bg-white border border-pink-200 rounded-xl font-bold text-xs cursor-pointer text-rose-900">Mes Siguiente ▶</button>
           </div>
         </div>
         <div id="calendar-view" class="grid grid-cols-7 gap-2 py-4"></div>
@@ -203,34 +195,34 @@
     <section id="pane-planes" class="tab-pane space-y-6 hidden">
       <div class="glass-card-solid rounded-3xl p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h2 class="text-xl font-black text-stone-800">📝 Planes de Estudio & Metas Bíblicas</h2>
-          <p class="text-xs text-stone-500 mt-0.5">Organiza qué libros o pasajes quieres estudiar y en qué fechas</p>
+          <h2 class="text-xl font-black text-rose-900">📝 Planes de Estudio & Metas Bíblicas</h2>
+          <p class="text-xs text-rose-600 mt-0.5">Organiza qué libro de la Biblia estudiarás y define los capítulos exactos</p>
         </div>
-        <button onclick="openModalPlan()" class="px-4 py-2 bg-[#9d759b] text-white font-extrabold text-xs rounded-xl shadow-md cursor-pointer">+ Nuevo Plan de Estudio</button>
+        <button onclick="openModalPlan()" class="px-4 py-2 bg-gradient-to-r from-pink-500 to-rose-500 text-white font-extrabold text-xs rounded-xl shadow-md cursor-pointer">+ Nuevo Plan de Estudio</button>
       </div>
 
       <div class="glass-card-solid rounded-3xl p-6">
         <div id="study-plans-container" class="space-y-4"></div>
-        <p id="study-plans-empty" class="text-xs text-stone-400 text-center py-6">No hay planes de estudio creados aún.</p>
+        <p id="study-plans-empty" class="text-xs text-rose-400 text-center py-6">No hay planes de estudio creados aún.</p>
       </div>
     </section>
 
   </main>
 
-  <!-- MODAL DEVOCIONAL CON BLOQUES TEMÁTICOS Y SECCIONES SEPARADAS -->
+  <!-- MODAL DEVOCIONAL -->
   <div id="modal-devocional" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-overlay hidden">
-    <div class="glass-card-solid rounded-3xl max-w-2xl w-full p-6 space-y-5 border border-[#e2d0de] max-h-[90vh] overflow-y-auto">
-      <div class="flex items-center justify-between pb-2 border-b border-[#e2d0de]">
-        <h3 class="text-base font-black text-stone-800">🕊️ Registrar Sesión Devocional</h3>
-        <button onclick="closeModal('modal-devocional')" class="text-stone-400 font-bold cursor-pointer hover:text-stone-700">✕</button>
+    <div class="glass-card-solid rounded-3xl max-w-2xl w-full p-6 space-y-5 border border-pink-200 max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between pb-2 border-b border-pink-200">
+        <h3 class="text-base font-black text-rose-900">🕊️ Registrar Sesión Devocional</h3>
+        <button onclick="closeModal('modal-devocional')" class="text-rose-400 font-bold cursor-pointer hover:text-rose-600">✕</button>
       </div>
       <div class="space-y-4 text-xs">
         <input type="hidden" id="dev-edit-id">
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-          <div><label class="font-bold text-stone-600 block mb-1">Fecha</label><input type="date" id="dev-date" class="w-full bg-white border border-[#e2d0de] rounded-xl px-3 py-2 font-bold text-stone-800"></div>
+          <div><label class="font-bold text-rose-900 block mb-1">Fecha</label><input type="date" id="dev-date" class="w-full bg-white border border-pink-200 rounded-xl px-3 py-2 font-bold text-rose-900"></div>
           <div>
-            <label class="font-bold text-stone-600 block mb-1">Versión</label>
-            <select id="dev-version" class="w-full bg-white border border-[#e2d0de] rounded-xl px-3 py-2 font-bold text-stone-800">
+            <label class="font-bold text-rose-900 block mb-1">Versión</label>
+            <select id="dev-version" class="w-full bg-white border border-pink-200 rounded-xl px-3 py-2 font-bold text-rose-900">
               <option value="Reina-Valera 1960 (RVR1960)">Reina-Valera 1960</option>
               <option value="Nueva Traducción Viviente (NTV)">Nueva Traducción Viviente (NTV)</option>
               <option value="Nueva Biblia de las Américas (NBLA)">Nueva Biblia de las Américas (NBLA)</option>
@@ -238,88 +230,97 @@
               <option value="Otra">Otra</option>
             </select>
           </div>
-          <div><label class="font-bold text-stone-600 block mb-1">Tiempo (min)</label><input type="number" id="dev-tiempo" placeholder="30" class="w-full bg-white border border-[#e2d0de] rounded-xl px-3 py-2 font-bold text-stone-800"></div>
+          <div><label class="font-bold text-rose-900 block mb-1">Tiempo (min)</label><input type="number" id="dev-tiempo" placeholder="30" class="w-full bg-white border border-pink-200 rounded-xl px-3 py-2 font-bold text-rose-900"></div>
         </div>
 
         <!-- BLOQUES TEMÁTICOS -->
-        <div class="space-y-3 pt-2 border-t border-[#e2d0de]">
+        <div class="space-y-3 pt-2 border-t border-pink-200">
           <div class="flex justify-between items-center">
-            <h4 class="font-black text-stone-800 text-xs uppercase tracking-wider">📑 Pasajes o Temas Leídos en la Sesión</h4>
-            <button onclick="addDevBlockRow()" class="px-3 py-1 bg-[#9d759b] text-white rounded-lg font-bold text-[11px] shadow-sm">+ Añadir Tema / Pasaje</button>
+            <h4 class="font-black text-rose-900 text-xs uppercase tracking-wider">📑 Pasajes o Temas Leídos en la Sesión</h4>
+            <button onclick="addDevBlockRow()" class="px-3 py-1 bg-pink-500 text-white rounded-lg font-bold text-[11px] shadow-sm">+ Añadir Tema / Pasaje</button>
           </div>
           <div id="dev-blocks-container" class="space-y-4"></div>
         </div>
 
         <!-- SECCIONES FINALES SEPARADAS -->
-        <div class="space-y-3 pt-3 border-t border-[#e2d0de]">
+        <div class="space-y-3 pt-3 border-t border-pink-200">
           <div>
-            <label class="font-bold text-stone-700 block mb-1">🙏 Oración Inicial / Peticiones</label>
-            <textarea id="dev-oracion" rows="2" placeholder="Tus palabras hacia Él..." class="w-full bg-white border border-[#e2d0de] rounded-xl p-2.5 font-medium text-stone-800"></textarea>
+            <label class="font-bold text-rose-900 block mb-1">🙏 Oración Inicial / Peticiones</label>
+            <textarea id="dev-oracion" rows="2" placeholder="Tus palabras hacia Él..." class="w-full bg-white border border-pink-200 rounded-xl p-2.5 font-medium text-rose-900"></textarea>
           </div>
           <div>
-            <label class="font-bold text-stone-700 block mb-1">💖 Gratitud</label>
-            <textarea id="dev-gratitud" rows="2" placeholder="Agradezco hoy por..." class="w-full bg-white border border-[#e2d0de] rounded-xl p-2.5 font-medium text-stone-800"></textarea>
+            <label class="font-bold text-rose-900 block mb-1">💖 Gratitud</label>
+            <textarea id="dev-gratitud" rows="2" placeholder="Agradezco hoy por..." class="w-full bg-white border border-pink-200 rounded-xl p-2.5 font-medium text-rose-900"></textarea>
           </div>
           <div>
-            <label class="font-bold text-stone-700 block mb-1">🍃 Desahogo (Espacio libre)</label>
-            <textarea id="dev-desahogo" rows="2" placeholder="Escribe aquí para soltar cargas, cansancio o preocupaciones..." class="w-full bg-white border border-[#e2d0de] rounded-xl p-2.5 font-medium text-stone-800"></textarea>
+            <label class="font-bold text-rose-900 block mb-1">🍃 Desahogo (Espacio libre)</label>
+            <textarea id="dev-desahogo" rows="2" placeholder="Escribe aquí para soltar cargas, cansancio o preocupaciones..." class="w-full bg-white border border-pink-200 rounded-xl p-2.5 font-medium text-rose-900"></textarea>
           </div>
         </div>
       </div>
       <div class="pt-2 flex justify-end space-x-2">
-        <button onclick="closeModal('modal-devocional')" class="px-4 py-2 border rounded-xl text-xs font-bold text-stone-700 cursor-pointer">Cancelar</button>
-        <button onclick="saveDevocional()" class="px-5 py-2 bg-gradient-to-r from-[#9d759b] to-[#7b5379] text-white rounded-xl text-xs font-black shadow-md cursor-pointer">Guardar Devocional</button>
+        <button onclick="closeModal('modal-devocional')" class="px-4 py-2 border border-pink-200 rounded-xl text-xs font-bold text-rose-900 cursor-pointer">Cancelar</button>
+        <button onclick="saveDevocional()" class="px-5 py-2 bg-gradient-to-r from-pink-500 to-rose-500 text-white rounded-xl text-xs font-black shadow-md cursor-pointer">Guardar Devocional</button>
       </div>
     </div>
   </div>
 
-  <!-- MODAL PLAN DE ESTUDIO -->
+  <!-- MODAL PLAN DE ESTUDIO (SELECCIÓN DE LIBRO Y CAPÍTULOS) -->
   <div id="modal-plan" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-overlay hidden">
-    <div class="glass-card-solid rounded-3xl max-w-md w-full p-6 space-y-4 border border-[#e2d0de]">
-      <div class="flex items-center justify-between pb-2 border-b border-[#e2d0de]">
-        <h3 class="text-base font-black text-stone-800">📝 Nuevo Plan de Lectura</h3>
-        <button onclick="closeModal('modal-plan')" class="text-stone-400 font-bold cursor-pointer">✕</button>
+    <div class="glass-card-solid rounded-3xl max-w-md w-full p-6 space-y-4 border border-pink-200">
+      <div class="flex items-center justify-between pb-2 border-b border-pink-200">
+        <h3 class="text-base font-black text-rose-900">📝 Nuevo Plan de Lectura Estructurado</h3>
+        <button onclick="closeModal('modal-plan')" class="text-rose-400 font-bold cursor-pointer">✕</button>
       </div>
       <div class="space-y-3 text-xs">
         <input type="hidden" id="plan-edit-id">
-        <div><label class="font-bold text-stone-600 block mb-1">Título del Plan (ej. Lectura de Isaías)</label><input type="text" id="plan-title" placeholder="Isaías del 15 al 30 de septiembre" class="w-full bg-white border border-[#e2d0de] rounded-xl px-3 py-2 font-bold text-stone-800"></div>
-        <div class="grid grid-cols-2 gap-2">
-          <div><label class="font-bold text-stone-600 block mb-1">Desde</label><input type="date" id="plan-start" class="w-full bg-white border border-[#e2d0de] rounded-xl px-3 py-2 font-bold text-stone-800"></div>
-          <div><label class="font-bold text-stone-600 block mb-1">Hasta</label><input type="date" id="plan-end" class="w-full bg-white border border-[#e2d0de] rounded-xl px-3 py-2 font-bold text-stone-800"></div>
+        <div>
+          <label class="font-bold text-rose-900 block mb-1">Seleccionar Libro de la Biblia</label>
+          <select id="plan-book-select" class="w-full bg-white border border-pink-200 rounded-xl px-3 py-2 font-bold text-rose-900">
+            <!-- Se llena dinámicamente -->
+          </select>
         </div>
-        <div><label class="font-bold text-stone-600 block mb-1">Descripción / Enfoque</label><textarea id="plan-desc" rows="3" placeholder="Detalles de lo que estudiarás..." class="w-full bg-white border border-[#e2d0de] rounded-xl p-2.5 font-medium text-stone-800"></textarea></div>
+        <div class="grid grid-cols-2 gap-2">
+          <div><label class="font-bold text-rose-900 block mb-1">Desde el capítulo</label><input type="number" id="plan-chapter-start" placeholder="1" class="w-full bg-white border border-pink-200 rounded-xl px-3 py-2 font-bold text-rose-900"></div>
+          <div><label class="font-bold text-rose-900 block mb-1">Hasta el capítulo</label><input type="number" id="plan-chapter-end" placeholder="12" class="w-full bg-white border border-pink-200 rounded-xl px-3 py-2 font-bold text-rose-900"></div>
+        </div>
+        <div class="grid grid-cols-2 gap-2">
+          <div><label class="font-bold text-rose-900 block mb-1">Fecha Inicio</label><input type="date" id="plan-start" class="w-full bg-white border border-pink-200 rounded-xl px-3 py-2 font-bold text-rose-900"></div>
+          <div><label class="font-bold text-rose-900 block mb-1">Fecha Límite</label><input type="date" id="plan-end" class="w-full bg-white border border-pink-200 rounded-xl px-3 py-2 font-bold text-rose-900"></div>
+        </div>
+        <div><label class="font-bold text-rose-900 block mb-1">Nota / Enfoque adicional</label><textarea id="plan-desc" rows="2" placeholder="Ej. Leer con atención en la mañana..." class="w-full bg-white border border-pink-200 rounded-xl p-2 font-medium text-rose-900"></textarea></div>
       </div>
       <div class="pt-2 flex justify-end space-x-2">
-        <button onclick="closeModal('modal-plan')" class="px-4 py-2 border rounded-xl text-xs font-bold text-stone-700 cursor-pointer">Cancelar</button>
-        <button onclick="saveStudyPlan()" class="px-4 py-2 bg-[#9d759b] text-white rounded-xl text-xs font-black cursor-pointer">Guardar Plan</button>
+        <button onclick="closeModal('modal-plan')" class="px-4 py-2 border border-pink-200 rounded-xl text-xs font-bold text-rose-900 cursor-pointer">Cancelar</button>
+        <button onclick="saveStudyPlan()" class="px-4 py-2 bg-pink-500 text-white rounded-xl text-xs font-black cursor-pointer">Guardar Plan</button>
       </div>
     </div>
   </div>
 
   <!-- MODALES DE RESPALDO -->
   <div id="modal-export" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-overlay hidden">
-    <div class="glass-card-solid rounded-3xl max-w-sm w-full p-5 space-y-3 border border-[#e2d0de]">
-      <h3 class="text-sm font-black text-stone-800 text-center">📤 Copiar Código de Datos</h3>
-      <textarea id="export-textarea" class="w-full h-32 bg-white border border-[#e2d0de] rounded-2xl p-2 text-[10px] font-mono text-stone-700 outline-none resize-none" readonly></textarea>
+    <div class="glass-card-solid rounded-3xl max-w-sm w-full p-5 space-y-3 border border-pink-200">
+      <h3 class="text-sm font-black text-rose-900 text-center">📤 Copiar Código de Datos</h3>
+      <textarea id="export-textarea" class="w-full h-32 bg-white border border-pink-200 rounded-2xl p-2 text-[10px] font-mono text-rose-900 outline-none resize-none" readonly></textarea>
       <div class="flex justify-between pt-2">
         <button onclick="closeModal('modal-export')" class="px-4 py-1.5 bg-stone-100 rounded-xl text-xs font-bold cursor-pointer">Cerrar</button>
-        <button onclick="copyExportText()" class="px-4 py-1.5 bg-[#9d759b] text-white rounded-xl text-xs font-black cursor-pointer">📋 Copiar</button>
+        <button onclick="copyExportText()" class="px-4 py-1.5 bg-pink-500 text-white rounded-xl text-xs font-black cursor-pointer">📋 Copiar</button>
       </div>
     </div>
   </div>
 
   <div id="modal-import" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-overlay hidden">
-    <div class="glass-card-solid rounded-3xl max-w-sm w-full p-5 space-y-3 border border-[#e2d0de]">
-      <h3 class="text-sm font-black text-stone-800 text-center">📥 Sincronizar Datos</h3>
-      <textarea id="import-textarea" placeholder="Pega el código aquí..." class="w-full h-32 bg-white border border-[#e2d0de] rounded-2xl p-2 text-[10px] font-mono text-stone-700 outline-none resize-none"></textarea>
+    <div class="glass-card-solid rounded-3xl max-w-sm w-full p-5 space-y-3 border border-pink-200">
+      <h3 class="text-sm font-black text-rose-900 text-center">📥 Sincronizar Datos</h3>
+      <textarea id="import-textarea" placeholder="Pega el código aquí..." class="w-full h-32 bg-white border border-pink-200 rounded-2xl p-2 text-[10px] font-mono text-rose-900 outline-none resize-none"></textarea>
       <div class="flex justify-between pt-2">
         <button onclick="closeModal('modal-import')" class="px-4 py-1.5 bg-stone-100 rounded-xl text-xs font-bold cursor-pointer">Cancelar</button>
-        <button onclick="applyImportText()" class="px-4 py-1.5 bg-[#7b5379] text-white rounded-xl text-xs font-black cursor-pointer">✨ Restaurar</button>
+        <button onclick="applyImportText()" class="px-4 py-1.5 bg-rose-500 text-white rounded-xl text-xs font-black cursor-pointer">✨ Restaurar</button>
       </div>
     </div>
   </div>
 
-  <div id="toast" class="fixed bottom-5 right-5 z-50 bg-stone-800 text-white px-4 py-2.5 rounded-2xl shadow-xl text-xs font-bold flex items-center space-x-2 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none border border-white/20">
+  <div id="toast" class="fixed bottom-5 right-5 z-50 bg-rose-900 text-white px-4 py-2.5 rounded-2xl shadow-xl text-xs font-bold flex items-center space-x-2 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none border border-white/20">
     <span>✨</span>
     <span id="toast-text">Acción completada</span>
   </div>
@@ -343,11 +344,11 @@
       isCloudReady = true;
     } catch (e) { console.warn("Firebase:", e); }
 
-    const STORAGE_KEY = 'MARY_SPIRITUAL_SPACE_V4';
+    const STORAGE_KEY = 'MARY_SPIRITUAL_SPACE_V5';
 
     let appData = {
       devocionales: [],
-      bibleProgress: {}, // { "Isaías": "#f4c2c2", ... } guarda el color
+      bibleProgress: {}, // { "Isaías": "#f4c2c2", ... }
       studyPlans: [],
       _updatedAt: 0
     };
@@ -369,11 +370,11 @@
       }
     };
 
-    let activeColor = '#f4c2c2'; // Color por defecto para pintar libros
+    let activeColor = '#f4c2c2';
 
     function setActiveColor(hex) {
       activeColor = hex;
-      showToast(hex === 'transparent' ? 'Borrador seleccionado' : 'Color seleccionado para estantería');
+      showToast(hex === 'transparent' ? 'Borrador seleccionado' : 'Color seleccionado para pintar');
     }
 
     let calendarYear = new Date().getFullYear();
@@ -388,8 +389,22 @@
       if(fromEl) fromEl.value = thirtyDaysAgo.toISOString().slice(0, 10);
       if(toEl) toEl.value = today;
 
+      populateBibleSelect();
       await loadDatabase();
       renderAllViews();
+    }
+
+    function populateBibleSelect() {
+      const select = document.getElementById('plan-book-select');
+      if(!select) return;
+      select.innerHTML = '';
+      for(let testamento in BIBLE_CATEGORIES) {
+        for(let cat in BIBLE_CATEGORIES[testamento]) {
+          BIBLE_CATEGORIES[testamento][cat].forEach(book => {
+            select.innerHTML += `<option value="${book}">${book} (${testamento})</option>`;
+          });
+        }
+      }
     }
 
     async function loadDatabase() {
@@ -398,7 +413,7 @@
 
       try {
         if (isCloudReady && db) {
-          const doc = await db.collection("mary_spiritual").doc("devotional_data_v4").get();
+          const doc = await db.collection("mary_spiritual").doc("devotional_data_v5").get();
           if (doc.exists) {
             const cloudData = doc.data();
             const cloudTimestamp = cloudData._updatedAt || 0;
@@ -406,7 +421,7 @@
               appData = Object.assign({}, appData, cloudData);
               localStorage.setItem(STORAGE_KEY, JSON.stringify(appData));
             } else {
-              db.collection("mary_spiritual").doc("devotional_data_v4").set(appData).catch(e => console.warn(e));
+              db.collection("mary_spiritual").doc("devotional_data_v5").set(appData).catch(e => console.warn(e));
             }
           }
         }
@@ -428,7 +443,7 @@
         appData._updatedAt = Date.now();
         localStorage.setItem(STORAGE_KEY, JSON.stringify(appData));
         if (isCloudReady && db) {
-          db.collection("mary_spiritual").doc("devotional_data_v4").set(appData).catch(e => console.warn(e));
+          db.collection("mary_spiritual").doc("devotional_data_v5").set(appData).catch(e => console.warn(e));
         }
       } catch (e) { console.error(e); }
     }
@@ -469,20 +484,20 @@
     function addDevBlockRow(b = { pasaje: '', tema: '', textoLiteral: '', ancla: '', reflexion: '', aplicacion: '' }) {
       const container = document.getElementById('dev-blocks-container');
       const div = document.createElement('div');
-      div.className = 'glass-card p-4 rounded-2xl space-y-2.5 border border-[#e2d0de] relative dev-block-card bg-white/70';
+      div.className = 'glass-card p-4 rounded-2xl space-y-2.5 border border-pink-200 relative dev-block-card bg-white/70';
       div.innerHTML = `
         <div class="flex justify-between items-center">
-          <span class="font-black text-stone-800 text-xs uppercase">📌 Tema / Pasaje</span>
-          <button onclick="this.closest('.dev-block-card').remove()" class="text-red-500 font-bold text-xs cursor-pointer">Eliminar bloque</button>
+          <span class="font-black text-rose-900 text-xs uppercase">📌 Tema / Pasaje</span>
+          <button onclick="this.closest('.dev-block-card').remove()" class="text-rose-500 font-bold text-xs cursor-pointer">Eliminar bloque</button>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-          <input type="text" placeholder="Pasaje (ej. Proverbios 6:6-11)" value="${b.pasaje || ''}" class="bg-white border border-[#e2d0de] rounded-xl px-3 py-1.5 font-bold text-xs text-stone-800 block-pasaje">
-          <input type="text" placeholder="Tema (ej. La pereza / sabiduría)" value="${b.tema || ''}" class="bg-white border border-[#e2d0de] rounded-xl px-3 py-1.5 font-bold text-xs text-stone-800 block-tema">
+          <input type="text" placeholder="Pasaje (ej. Proverbios 6:6-11)" value="${b.pasaje || ''}" class="bg-white border border-pink-200 rounded-xl px-3 py-1.5 font-bold text-xs text-rose-900 block-pasaje">
+          <input type="text" placeholder="Tema (ej. La pereza / sabiduría)" value="${b.tema || ''}" class="bg-white border border-pink-200 rounded-xl px-3 py-1.5 font-bold text-xs text-rose-900 block-tema">
         </div>
-        <textarea rows="2" placeholder="Texto literal o resumen del pasaje..." class="w-full bg-white border border-[#e2d0de] rounded-xl p-2 text-xs font-medium text-stone-800 block-texto">${b.textoLiteral || ''}</textarea>
-        <input type="text" placeholder="Versículo ancla (frase clave)..." value="${b.ancla || ''}" class="w-full bg-white border border-[#e2d0de] rounded-xl px-3 py-1.5 font-bold text-xs text-stone-800 block-ancla">
-        <textarea rows="2" placeholder="Reflexión de este tema..." class="w-full bg-white border border-[#e2d0de] rounded-xl p-2 text-xs font-medium text-stone-800 block-reflexion">${b.reflexion || ''}</textarea>
-        <textarea rows="2" placeholder="Aplicación práctica o corrección..." class="w-full bg-white border border-[#e2d0de] rounded-xl p-2 text-xs font-medium text-stone-800 block-aplicacion">${b.aplicacion || ''}</textarea>
+        <textarea rows="2" placeholder="Texto literal o resumen del pasaje..." class="w-full bg-white border border-pink-200 rounded-xl p-2 text-xs font-medium text-rose-900 block-texto">${b.textoLiteral || ''}</textarea>
+        <input type="text" placeholder="Versículo ancla (frase clave)..." value="${b.ancla || ''}" class="w-full bg-white border border-pink-200 rounded-xl px-3 py-1.5 font-bold text-xs text-rose-900 block-ancla">
+        <textarea rows="2" placeholder="Reflexión de este tema..." class="w-full bg-white border border-pink-200 rounded-xl p-2 text-xs font-medium text-rose-900 block-reflexion">${b.reflexion || ''}</textarea>
+        <textarea rows="2" placeholder="Aplicación práctica o corrección..." class="w-full bg-white border border-pink-200 rounded-xl p-2 text-xs font-medium text-rose-900 block-aplicacion">${b.aplicacion || ''}</textarea>
       `;
       container.appendChild(div);
     }
@@ -543,145 +558,10 @@
       saveDatabase(); renderAllViews(); showToast('Devocional eliminado');
     }
 
-    function colorBook(bookName) {
-      if (activeColor === 'transparent') {
-        delete appData.bibleProgress[bookName];
-      } else {
-        appData.bibleProgress[bookName] = activeColor;
-      }
-      saveDatabase();
-      renderAllViews();
-    }
-
-    function renderBibleProgressBars() {
-      const container = document.getElementById('bible-progress-bars');
-      if(!container) return;
-
-      const otList = [];
-      const ntList = [];
-      for(let cat in BIBLE_BOOKS["Antiguo Testamento"]) otList.push(...BIBLE_BOOKS["Antiguo Testamento"][cat]);
-      for(let cat in BIBLE_BOOKS["Nuevo Testamento"]) ntList.push(...BIBLE_BOOKS["Nuevo Testamento"][cat]);
-      const allBooks = [...otList, ...ntList];
-
-      const otChecked = otList.filter(b => appData.bibleProgress[b]).length;
-      const ntChecked = ntList.filter(b => appData.bibleProgress[b]).length;
-      const allChecked = allBooks.filter(b => appData.bibleProgress[b]).length;
-
-      const otPct = Math.round((otChecked / otList.length) * 100);
-      const ntPct = Math.round((ntChecked / ntList.length) * 100);
-      const allPct = Math.round((allChecked / allBooks.length) * 100);
-
-      container.innerHTML = `
-        <div class="glass-card p-4 rounded-2xl space-y-2 bg-white/70">
-          <div class="flex justify-between items-center text-xs font-black text-stone-800">
-            <span>Antiguo Testamento</span>
-            <span>${otChecked} / ${otList.length} (${otPct}%)</span>
-          </div>
-          <div class="w-full bg-[#f0eaf4] h-2.5 rounded-full overflow-hidden border border-[#e2d0de]">
-            <div class="bg-gradient-to-r from-[#9d759b] to-[#7b5379] h-full rounded-full transition-all" style="width: ${otPct}%"></div>
-          </div>
-        </div>
-
-        <div class="glass-card p-4 rounded-2xl space-y-2 bg-white/70">
-          <div class="flex justify-between items-center text-xs font-black text-stone-800">
-            <span>Nuevo Testamento</span>
-            <span>${ntChecked} / ${ntList.length} (${ntPct}%)</span>
-          </div>
-          <div class="w-full bg-[#f0eaf4] h-2.5 rounded-full overflow-hidden border border-[#e2d0de]">
-            <div class="bg-gradient-to-r from-[#9d759b] to-[#7b5379] h-full rounded-full transition-all" style="width: ${ntPct}%"></div>
-          </div>
-        </div>
-
-        <div class="glass-card p-4 rounded-2xl space-y-2 bg-white/70">
-          <div class="flex justify-between items-center text-xs font-black text-stone-800">
-            <span>Biblia Completa</span>
-            <span>${allChecked} / ${allBooks.length} (${allPct}%)</span>
-          </div>
-          <div class="w-full bg-[#f0eaf4] h-2.5 rounded-full overflow-hidden border border-[#e2d0de]">
-            <div class="bg-gradient-to-r from-[#9d759b] to-[#7b5379] h-full rounded-full transition-all" style="width: ${allPct}%"></div>
-          </div>
-        </div>
-      `;
-    }
-
-    function renderBibleBookshelf() {
-      const container = document.getElementById('bible-bookshelf-container');
-      if(!container) return;
-      container.innerHTML = '';
-
-      for (let testamento in BIBLE_BOOKS) {
-        let catsHtml = `<h4 class="font-black text-stone-800 text-sm pb-1 border-b border-[#e2d0de] uppercase tracking-wider">${testamento}</h4>`;
-        
-        for (let catName in BIBLE_BOOKS[testamento]) {
-          let booksHtml = '';
-          BIBLE_BOOKS[testamento][catName].forEach(book => {
-            const color = appData.bibleProgress[book] || '';
-            const style = color ? `background-color: ${color}; border-color: ${color}; color: #3a2a38; font-weight: 800;` : 'background-color: white; border-color: #e2d0de; color: #5a4b5c;';
-            
-            booksHtml += `
-              <button onclick="colorBook('${book}')" style="${style}" class="px-2.5 py-1.5 rounded-xl border text-[11px] font-bold shadow-xs transition hover:scale-105 text-center truncate">
-                ${book}
-              </button>`;
-          });
-
-          catsHtml += `
-            <div class="space-y-1.5 pt-2">
-              <span class="text-[11px] font-extrabold text-[#9d759b] uppercase">${catName}</span>
-              <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-1.5">${booksHtml}</div>
-            </div>`;
-        }
-
-        container.innerHTML += `<div class="glass-card p-4 rounded-2xl space-y-3 bg-white/60">${catsHtml}</div>`;
-      }
-    }
-
-    function changeCalendarMonth(dir) {
-      calendarMonth += dir;
-      if (calendarMonth > 11) { calendarMonth = 0; calendarYear++; }
-      else if (calendarMonth < 0) { calendarMonth = 11; calendarYear--; }
-      renderCalendar();
-    }
-
-    function renderCalendar() {
-      const calView = document.getElementById('calendar-view');
-      const label = document.getElementById('calendar-month-label');
-      if (!calView || !label) return;
-
-      calView.innerHTML = '';
-      const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
-      label.innerText = `${monthNames[calendarMonth]} ${calendarYear}`;
-
-      ['L', 'M', 'X', 'J', 'V', 'S', 'D'].forEach(d => {
-        calView.innerHTML += `<div class="text-center font-black text-[10px] text-stone-400">${d}</div>`;
-      });
-
-      const firstDayObj = new Date(calendarYear, calendarMonth, 1);
-      let startDayOfWeek = firstDayObj.getDay(); 
-      startDayOfWeek = (startDayOfWeek + 6) % 7;
-
-      const daysInMonth = new Date(calendarYear, calendarMonth + 1, 0).getDate();
-
-      for (let i = 0; i < startDayOfWeek; i++) {
-        calView.innerHTML += `<div></div>`;
-      }
-
-      for (let i = 1; i <= daysInMonth; i++) {
-        const dStr = `${calendarYear}-${String(calendarMonth + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
-        const hasDev = appData.devocionales.some(x => x.date === dStr);
-
-        let bgClass = hasDev ? 'bg-[#9d759b]/25 border border-[#9d759b] text-stone-900 font-black' : 'bg-white/70 border border-[#e2d0de] text-stone-700 font-bold';
-
-        calView.innerHTML += `
-          <div class="h-16 rounded-xl flex flex-col items-center justify-center text-xs transition ${bgClass}" title="${dStr}">
-            <span>${i}</span>
-            ${hasDev ? '<span class="text-xs mt-1">🙏</span>' : ''}
-          </div>`;
-      }
-    }
-
     function openModalPlan() {
       document.getElementById('plan-edit-id').value = '';
-      document.getElementById('plan-title').value = '';
+      document.getElementById('plan-chapter-start').value = '';
+      document.getElementById('plan-chapter-end').value = '';
       document.getElementById('plan-start').value = new Date().toISOString().slice(0, 10);
       document.getElementById('plan-end').value = '';
       document.getElementById('plan-desc').value = '';
@@ -690,9 +570,20 @@
 
     function saveStudyPlan() {
       const editId = document.getElementById('plan-edit-id').value;
+      const book = document.getElementById('plan-book-select').value;
+      const chStart = document.getElementById('plan-chapter-start').value;
+      const chEnd = document.getElementById('plan-chapter-end').value;
+      
+      let title = book;
+      if(chStart && chEnd) title += ` (Cap. ${chStart} al ${chEnd})`;
+      else if(chStart) title += ` (Cap. ${chStart}+)`;
+
       const plan = {
         id: editId ? parseInt(editId) : Date.now(),
-        title: document.getElementById('plan-title').value || 'Plan sin título',
+        title,
+        book,
+        chStart,
+        chEnd,
         startDate: document.getElementById('plan-start').value,
         endDate: document.getElementById('plan-end').value,
         description: document.getElementById('plan-desc').value,
@@ -729,15 +620,151 @@
           <div class="glass-card p-4 rounded-2xl flex justify-between items-start text-xs ${p.completed ? 'opacity-60 bg-stone-50' : ''}">
             <div class="space-y-1">
               <div class="flex items-center gap-2">
-                <input type="checkbox" ${p.completed ? 'checked' : ''} onchange="toggleStudyPlan(${p.id})" class="accent-[#9d759b] w-4 h-4 rounded">
-                <strong class="text-sm font-black text-stone-800 ${p.completed ? 'line-through' : ''}">${p.title}</strong>
+                <input type="checkbox" ${p.completed ? 'checked' : ''} onchange="toggleStudyPlan(${p.id})" class="accent-pink-500 w-4 h-4 rounded">
+                <strong class="text-sm font-black text-rose-900 ${p.completed ? 'line-through' : ''}">📖 ${p.title}</strong>
               </div>
-              <p class="text-stone-500">📅 Desde ${p.startDate || '--'} hasta ${p.endDate || '--'}</p>
-              <p class="text-stone-700">${p.description || ''}</p>
+              <p class="text-rose-500">📅 Del ${p.startDate || '--'} al ${p.endDate || '--'}</p>
+              <p class="text-rose-800">${p.description || ''}</p>
             </div>
-            <button onclick="deleteStudyPlan(${p.id})" class="text-red-500 font-bold px-2">✕</button>
+            <button onclick="deleteStudyPlan(${p.id})" class="text-rose-400 hover:text-rose-600 font-bold px-2">✕</button>
           </div>`;
       });
+    }
+
+    function colorBook(bookName) {
+      if (activeColor === 'transparent') {
+        delete appData.bibleProgress[bookName];
+      } else {
+        appData.bibleProgress[bookName] = activeColor;
+      }
+      saveDatabase();
+      renderAllViews();
+    }
+
+    function renderBibleProgressBars() {
+      const container = document.getElementById('bible-progress-bars');
+      if(!container) return;
+
+      const otList = [];
+      const ntList = [];
+      for(let cat in BIBLE_CATEGORIES["Antiguo Testamento"]) otList.push(...BIBLE_CATEGORIES["Antiguo Testamento"][cat]);
+      for(let cat in BIBLE_CATEGORIES["Nuevo Testamento"]) ntList.push(...BIBLE_CATEGORIES["Nuevo Testamento"][cat]);
+      const allBooks = [...otList, ...ntList];
+
+      const otChecked = otList.filter(b => appData.bibleProgress[b]).length;
+      const ntChecked = ntList.filter(b => appData.bibleProgress[b]).length;
+      const allChecked = allBooks.filter(b => appData.bibleProgress[b]).length;
+
+      const otPct = Math.round((otChecked / otList.length) * 100);
+      const ntPct = Math.round((ntChecked / ntList.length) * 100);
+      const allPct = Math.round((allChecked / allBooks.length) * 100);
+
+      container.innerHTML = `
+        <div class="glass-card p-4 rounded-2xl space-y-2 bg-white/70">
+          <div class="flex justify-between items-center text-xs font-black text-rose-900">
+            <span>Antiguo Testamento</span>
+            <span>${otChecked} / ${otList.length} (${otPct}%)</span>
+          </div>
+          <div class="w-full bg-pink-100 h-2.5 rounded-full overflow-hidden border border-pink-200">
+            <div class="bg-gradient-to-r from-pink-500 to-rose-500 h-full rounded-full transition-all" style="width: ${otPct}%"></div>
+          </div>
+        </div>
+
+        <div class="glass-card p-4 rounded-2xl space-y-2 bg-white/70">
+          <div class="flex justify-between items-center text-xs font-black text-rose-900">
+            <span>Nuevo Testamento</span>
+            <span>${ntChecked} / ${ntList.length} (${ntPct}%)</span>
+          </div>
+          <div class="w-full bg-pink-100 h-2.5 rounded-full overflow-hidden border border-pink-200">
+            <div class="bg-gradient-to-r from-pink-500 to-rose-500 h-full rounded-full transition-all" style="width: ${ntPct}%"></div>
+          </div>
+        </div>
+
+        <div class="glass-card p-4 rounded-2xl space-y-2 bg-white/70">
+          <div class="flex justify-between items-center text-xs font-black text-rose-900">
+            <span>Biblia Completa</span>
+            <span>${allChecked} / ${allBooks.length} (${allPct}%)</span>
+          </div>
+          <div class="w-full bg-pink-100 h-2.5 rounded-full overflow-hidden border border-pink-200">
+            <div class="bg-gradient-to-r from-pink-500 to-rose-500 h-full rounded-full transition-all" style="width: ${allPct}%"></div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderBibleBookshelf() {
+      const container = document.getElementById('bible-bookshelf-container');
+      if(!container) return;
+      container.innerHTML = '';
+
+      for (let testamento in BIBLE_CATEGORIES) {
+        let catsHtml = `<h4 class="font-black text-rose-900 text-sm pb-1 border-b border-pink-200 uppercase tracking-wider">${testamento}</h4>`;
+        
+        for (let catName in BIBLE_CATEGORIES[testamento]) {
+          let booksHtml = '';
+          BIBLE_CATEGORIES[testamento][catName].forEach(book => {
+            const color = appData.bibleProgress[book] || '';
+            const style = color ? `background-color: ${color}; border-color: ${color}; color: #50233b; font-weight: 800;` : 'background-color: white; border-color: #fbcfe8; color: #831843;';
+            
+            booksHtml += `
+              <button onclick="colorBook('${book}')" style="${style}" class="px-2.5 py-1.5 rounded-xl border text-[11px] font-bold shadow-xs transition hover:scale-105 text-center truncate">
+                ${book}
+              </button>`;
+          });
+
+          catsHtml += `
+            <div class="space-y-1.5 pt-2">
+              <span class="text-[11px] font-extrabold text-pink-600 uppercase">${catName}</span>
+              <div class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-1.5">${booksHtml}</div>
+            </div>`;
+        }
+
+        container.innerHTML += `<div class="glass-card p-4 rounded-2xl space-y-3 bg-white/60">${catsHtml}</div>`;
+      }
+    }
+
+    function changeCalendarMonth(dir) {
+      calendarMonth += dir;
+      if (calendarMonth > 11) { calendarMonth = 0; calendarYear++; }
+      else if (calendarMonth < 0) { calendarMonth = 11; calendarYear--; }
+      renderCalendar();
+    }
+
+    function renderCalendar() {
+      const calView = document.getElementById('calendar-view');
+      const label = document.getElementById('calendar-month-label');
+      if (!calView || !label) return;
+
+      calView.innerHTML = '';
+      const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+      label.innerText = `${monthNames[calendarMonth]} ${calendarYear}`;
+
+      ['L', 'M', 'X', 'J', 'V', 'S', 'D'].forEach(d => {
+        calView.innerHTML += `<div class="text-center font-black text-[10px] text-rose-400">${d}</div>`;
+      });
+
+      const firstDayObj = new Date(calendarYear, calendarMonth, 1);
+      let startDayOfWeek = firstDayObj.getDay(); 
+      startDayOfWeek = (startDayOfWeek + 6) % 7;
+
+      const daysInMonth = new Date(calendarYear, calendarMonth + 1, 0).getDate();
+
+      for (let i = 0; i < startDayOfWeek; i++) {
+        calView.innerHTML += `<div></div>`;
+      }
+
+      for (let i = 1; i <= daysInMonth; i++) {
+        const dStr = `${calendarYear}-${String(calendarMonth + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
+        const hasDev = appData.devocionales.some(x => x.date === dStr);
+
+        let bgClass = hasDev ? 'bg-pink-300/60 border border-pink-500 text-rose-950 font-black shadow-sm' : 'bg-white/70 border border-pink-200 text-rose-900 font-bold';
+
+        calView.innerHTML += `
+          <div class="h-16 rounded-xl flex flex-col items-center justify-center text-xs transition ${bgClass}" title="${dStr}">
+            <span>${i}</span>
+            ${hasDev ? '<span class="text-xs mt-1">🙏</span>' : ''}
+          </div>`;
+      }
     }
 
     function renderDevocionalHistory() {
@@ -772,7 +799,7 @@
         .sort((a,b)=>b.date.localeCompare(a.date));
 
       if(sorted.length === 0) {
-        container.innerHTML = `<p class="text-xs text-stone-400 text-center py-6 glass-card rounded-2xl">No hay registros devocionales que coincidan con la búsqueda o rango de fechas.</p>`;
+        container.innerHTML = `<p class="text-xs text-rose-400 text-center py-6 glass-card rounded-2xl">No hay registros devocionales que coincidan con la búsqueda o rango de fechas.</p>`;
         return;
       }
 
@@ -780,36 +807,36 @@
         let blocksHtml = '';
         (d.blocks || []).forEach(b => {
           blocksHtml += `
-            <div class="bg-white/80 p-3.5 rounded-2xl space-y-2 border border-[#e2d0de]">
+            <div class="bg-white/80 p-3.5 rounded-2xl space-y-2 border border-pink-200">
               <div class="flex justify-between items-center">
-                <strong class="text-stone-800 text-xs font-black">📖 ${b.pasaje || 'Pasaje'}</strong>
-                <span class="text-[10px] bg-[#f0eaf4] text-[#7b5379] font-bold px-2 py-0.5 rounded-md">${b.tema || 'Tema'}</span>
+                <strong class="text-rose-900 text-xs font-black">📖 ${b.pasaje || 'Pasaje'}</strong>
+                <span class="text-[10px] bg-pink-100 text-pink-800 font-bold px-2 py-0.5 rounded-md">${b.tema || 'Tema'}</span>
               </div>
-              ${b.textoLiteral ? `<p class="italic text-stone-700 text-xs">"${b.textoLiteral}"</p>` : ''}
-              ${b.ancla ? `<p class="text-xs">⚓ <strong>Ancla:</strong> <span class="text-[#9d759b] font-bold">${b.ancla}</span></p>` : ''}
+              ${b.textoLiteral ? `<p class="italic text-rose-800 text-xs">"${b.textoLiteral}"</p>` : ''}
+              ${b.ancla ? `<p class="text-xs">⚓ <strong>Ancla:</strong> <span class="text-pink-600 font-bold">${b.ancla}</span></p>` : ''}
               ${b.reflexion ? `<p class="text-xs">💡 <strong>Reflexión:</strong> ${b.reflexion}</p>` : ''}
               ${b.aplicacion ? `<p class="text-xs">⚡ <strong>Aplicación:</strong> ${b.aplicacion}</p>` : ''}
             </div>`;
         });
 
         container.innerHTML += `
-          <div class="glass-card p-5 rounded-3xl space-y-3 text-xs border-l-4 border-l-[#9d759b] shadow-md">
-            <div class="flex justify-between items-center pb-2 border-b border-[#e2d0de]">
+          <div class="glass-card p-5 rounded-3xl space-y-3 text-xs border-l-4 border-l-pink-500 shadow-md">
+            <div class="flex justify-between items-center pb-2 border-b border-pink-200">
               <div>
-                <strong class="text-sm font-black text-stone-800">🕊️ Sesión Devocional</strong>
-                <span class="text-[10px] text-stone-500 block">📅 ${d.date} · Versión: ${d.version} (${d.tiempo || 0} min)</span>
+                <strong class="text-sm font-black text-rose-900">🕊️ Sesión Devocional</strong>
+                <span class="text-[10px] text-rose-500 block">📅 ${d.date} · Versión: ${d.version} (${d.tiempo || 0} min)</span>
               </div>
               <div class="flex items-center gap-1">
-                <button onclick="editDevocional(${d.id})" class="px-2.5 py-1 bg-white border border-[#e2d0de] rounded-lg font-bold text-stone-700 cursor-pointer hover:bg-stone-50">✏️ Editar</button>
-                <button onclick="deleteDevocional(${d.id})" class="px-2.5 py-1 bg-red-50 text-red-600 border border-red-200 rounded-lg font-bold cursor-pointer">✕</button>
+                <button onclick="editDevocional(${d.id})" class="px-2.5 py-1 bg-white border border-pink-200 rounded-lg font-bold text-rose-800 cursor-pointer hover:bg-pink-50">✏️ Editar</button>
+                <button onclick="deleteDevocional(${d.id})" class="px-2.5 py-1 bg-rose-50 text-rose-600 border border-rose-200 rounded-lg font-bold cursor-pointer">✕</button>
               </div>
             </div>
 
             <div class="space-y-2">${blocksHtml}</div>
 
-            ${d.oracion ? `<div class="bg-white/70 p-3.5 rounded-2xl space-y-1 border border-[#e2d0de]"><p class="font-bold text-stone-800">🙏 Oración Inicial:</p><p class="text-stone-700">${d.oracion}</p></div>` : ''}
-            ${d.gratitud ? `<div class="bg-[#f7f2eb]/80 p-3.5 rounded-2xl space-y-1 border border-[#e2d0de]"><p class="font-bold text-stone-800">💖 Gratitud:</p><p class="text-stone-700">${d.gratitud}</p></div>` : ''}
-            ${d.desahogo ? `<div class="bg-[#f0eaf4]/70 p-3.5 rounded-2xl space-y-1 border border-[#e2d0de]"><p class="font-bold text-stone-800">🍃 Desahogo:</p><p class="text-stone-700">${d.desahogo}</p></div>` : ''}
+            ${d.oracion ? `<div class="bg-white/70 p-3.5 rounded-2xl space-y-1 border border-pink-200"><p class="font-bold text-rose-900">🙏 Oración Inicial:</p><p class="text-rose-700">${d.oracion}</p></div>` : ''}
+            ${d.gratitud ? `<div class="bg-pink-50/70 p-3.5 rounded-2xl space-y-1 border border-pink-200"><p class="font-bold text-rose-900">💖 Gratitud:</p><p class="text-rose-700">${d.gratitud}</p></div>` : ''}
+            ${d.desahogo ? `<div class="bg-rose-50/70 p-3.5 rounded-2xl space-y-1 border border-rose-200"><p class="font-bold text-rose-900">🍃 Desahogo:</p><p class="text-rose-700">${d.desahogo}</p></div>` : ''}
           </div>`;
       });
     }
